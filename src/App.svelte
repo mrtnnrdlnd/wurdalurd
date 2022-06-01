@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { Filters } from './Filters';
 	import { onMount } from 'Svelte';
-	let words: string[] = [];
-	let filteredWords: string[];
+
+	import { wordsLengthFive } from './wordsLengthFive'
+
+	let words: string[] = wordsLengthFive;
+	let filteredWords: string[] = words;
 	let displayedWords: string[];
 
 	let wordLength = 5;
@@ -11,11 +14,12 @@
 	let letters: string[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(""));
 	let filters: Function[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));;
 
-   	onMount(async () => {
-        const response = await fetch("https://github.com/mrtnnrdlnd/wurdalurd/blob/main/public/words.json");
-        words = await response.json() as string[];
-		filteredWords = words;
-	});
+   	// onMount(async () => {
+    //     // const response = await fetch("https://github.com/mrtnnrdlnd/wurdalurd/blob/main/public/words.json");
+	// 	const response = await fetch("words.json");
+    //     words = await response.json() as string[];
+	// 	filteredWords = words;
+	// });
 
 	function toggleFilter(row, column) {
 		let backgroundColor = "";
@@ -43,7 +47,7 @@
 		filteredWords = words.filter((w) => {
 			for (let row = 0; row < nrOfRows; row++) {
 				for (let column = 0; column < wordLength; column++) {
-					if (letters[row][column] != "" && !filters[row][column](w, letters[row][column], column)) {
+					if (letters[row][column] != "" && !filters[row][column](w, letters[row][column].toLocaleLowerCase(), column)) {
 						return false;
 					}
 				}
@@ -133,8 +137,11 @@
 
 	function handleInput(e: Event, i, j) {
 		let inputEvent = e as InputEvent;
-		console.log(inputEvent.data)
-		if (alphabet.includes(inputEvent.data)) {
+		if (inputEvent.data == null) {
+			filters[i][j] = Filters.noFilter
+			document.getElementById(i.toString().concat(j)).style.backgroundColor = "";
+		}
+		else if (alphabet.includes(inputEvent.data.toLocaleLowerCase())) {
 			focusNext(i,j);
 		}
 		
@@ -183,6 +190,10 @@
 </main>
 
 <style>
+	main {
+		margin: 0px auto;
+		width: 320px;	
+	}
 	.row {
 		display:inline-flex;
 	}
@@ -193,11 +204,11 @@
 		margin: 0px 5px 5px 0px;
 		border: 1px solid #ccc;
 		border-radius: 3px;
-		width: 50px;
-		height: 50px;
+		width: 60px;
+		height: 60px;
 		text-align: center;
-		vertical-align:middle;
-		font-size: 30px;
+		/* vertical-align:middle; */
+		font-size: 36px;
 	}
 
 </style>
