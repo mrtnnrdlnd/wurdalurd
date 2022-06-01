@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Filters } from './Filters';
-	import { onMount } from 'Svelte';
 
-	import { wordsLengthFive } from './wordsLengthFiveLong'
+	import { wordsLengthFive } from './wordsLengthFiveShort'
 
 	let words: string[] = wordsLengthFive;
 	let filteredWords: string[] = words;
@@ -20,6 +19,72 @@
     //     words = await response.json() as string[];
 	// 	filteredWords = words;
 	// });
+
+	// console.log(average(benchmark(words)));
+
+	function average(numbers: number[]): number {
+		let sum: number = 0;
+		numbers.forEach((n) => sum += n);
+		return sum / numbers.length;
+	}
+
+	function benchmark(words: string[]): number[] {
+		let filteredWords;
+
+		let randomWord: string;
+		let guess: string;
+		let attemts: number[] = [];
+
+		for (let i = 0; i < 500; i++) {
+			filteredWords = words;
+			randomWord = pickRandomWord(words);
+
+			for (let attemt = 1; attemt <= 6; attemt++) {
+				
+				if (filteredWords.length > 0 && filteredWords.length <= 4) {
+					guess = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()][0];
+				}
+				else if (filteredWords.length > 4) {
+					guess = [...ratedWords(words, rateAlphabet(filteredWords)).keys()][0];
+				}
+
+				if (guess == randomWord) {
+					attemts.push(attemt);
+					break;
+				}
+
+				let filters: Function[] = new Array<Function>(words[0].length);
+
+				guess.split("").forEach((letter, i) => {
+					if (randomWord.charAt(i) == letter) {
+						filters[i] = Filters.rightPosition;
+					}
+					if (!randomWord.includes(letter)) {
+						filters[i] = Filters.notInWord;
+					}
+					if (randomWord.includes(letter) && randomWord.charAt(i) != letter) {
+						filters[i] = Filters.wrongPosition;
+					}
+				})
+
+				filteredWords = filteredWords.filter((w) => {
+					for (let letterIndex = 0; letterIndex < wordLength; letterIndex++) {
+						if (!filters[letterIndex](w, guess.charAt(letterIndex).toLocaleLowerCase(), letterIndex)) {
+							return false;
+						}
+					}
+					return true;
+				});
+				
+			}			
+		}
+
+		return attemts;
+	}
+	
+	function pickRandomWord(words: string[]): string {
+		return words[Math.floor(Math.random()*words.length)]
+	}
 
 	function toggleFilter(row, column) {
 		let backgroundColor = "";
@@ -58,10 +123,10 @@
 	}
 
 	$: {
-		if (filteredWords.length > 0 && filteredWords.length <= 5) {
+		if (filteredWords.length > 0 && filteredWords.length <= 4) {
 			displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
 		}
-		else if (filteredWords.length > 5) {
+		else if (filteredWords.length > 4) {
 			displayedWords = [...ratedWords(words, rateAlphabet(filteredWords)).keys()].slice(0, 10)
 		}
 	}
@@ -94,14 +159,14 @@
 	const alphabet: string[] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 	
 	function rateAlphabet(words: string[]): Map<string, number[]> {
-		// const alphabet: string[] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+		const alphabet: string[] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 		const wordLength = words[0].length;
 		const totalNrOfWords = words.length;
 
 		let ratedAlphabet: Map<string, number[]> = new Map();
 
 		for (const letter of alphabet) {
-			let used: boolean = letters[0].includes(letter);
+			// let used: boolean = letters[0].includes(letter);
 			let rating: number[] = new Array(wordLength + 1);
 			rating[wordLength] = words.filter((w) => w.includes(letter)).length;
 			for (let i = 0; i < wordLength; i++) {
@@ -109,9 +174,9 @@
 				rating[i] += Math.pow(words.filter((w) => Filters.wrongPosition(w, letter, i)).length, 2);
 				rating[i] += Math.pow(words.filter((w) => Filters.notInWord(w, letter, i)).length, 2);
 				rating[i] /= totalNrOfWords;
-				if (used) {
-					rating[i] *= 1.5;
-				}
+				// if (used) {
+				// 	rating[i] *= 2;
+				// }
 			}
 
 			if (letters[0].find((l) => l == letter)) {
@@ -128,9 +193,10 @@
 		let ratedWords: Map<string, number> = new Map();
 		let sum: number;
 
+
 		words.forEach((word) => {
 			sum = 0;
-			word.split("").forEach((letter, i) => {
+			word.toLocaleLowerCase().split("").forEach((letter, i) => {
 				sum += ratedAlphabet.get(letter)[i];
 				
 				if (word.split(letter).length > 2) {
