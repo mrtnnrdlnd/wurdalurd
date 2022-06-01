@@ -12945,6 +12945,9 @@ export const wordsLengthFive = [
     "geums",
     "grits",
     "kames",
-    "death"
+    "death",
+
+    "koran",
+    "louse"
     
 ]

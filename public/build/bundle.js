@@ -13335,7 +13335,10 @@ var app = (function () {
         "geums",
         "grits",
         "kames",
-        "death"
+        "death",
+
+        "koran",
+        "louse"
         
     ];
 
@@ -13370,7 +13373,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (135:3) {#each row as letter, j}
+    // (140:3) {#each row as letter, j}
     function create_each_block_3(ctx) {
     	let input;
     	let mounted;
@@ -13394,7 +13397,7 @@ var app = (function () {
     			attr_dev(input, "id", /*i*/ ctx[23].toString().concat(/*j*/ ctx[25].toString()));
     			attr_dev(input, "maxlength", "1");
     			attr_dev(input, "class", "letterbox svelte-kxi75n");
-    			add_location(input, file, 135, 4, 5182);
+    			add_location(input, file, 140, 4, 5370);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input, anchor);
@@ -13428,14 +13431,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(135:3) {#each row as letter, j}",
+    		source: "(140:3) {#each row as letter, j}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (133:1) {#each letters as row, i}
+    // (138:1) {#each letters as row, i}
     function create_each_block_2(ctx) {
     	let div;
     	let t;
@@ -13459,8 +13462,8 @@ var app = (function () {
     			t = space();
     			br = element("br");
     			attr_dev(div, "class", "row svelte-kxi75n");
-    			add_location(div, file, 133, 2, 5132);
-    			add_location(br, file, 144, 2, 5427);
+    			add_location(div, file, 138, 2, 5320);
+    			add_location(br, file, 149, 2, 5615);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13509,14 +13512,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(133:1) {#each letters as row, i}",
+    		source: "(138:1) {#each letters as row, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (148:1) {#if filteredWords && filteredWords.length > 0}
+    // (153:1) {#if filteredWords && filteredWords.length > 0}
     function create_if_block(ctx) {
     	let span;
     	let t0_value = /*filteredWords*/ ctx[0].length + "";
@@ -13544,8 +13547,8 @@ var app = (function () {
     			}
 
     			each_1_anchor = empty();
-    			add_location(span, file, 148, 2, 5493);
-    			add_location(br, file, 148, 37, 5528);
+    			add_location(span, file, 153, 2, 5681);
+    			add_location(br, file, 153, 37, 5716);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -13599,14 +13602,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(148:1) {#if filteredWords && filteredWords.length > 0}",
+    		source: "(153:1) {#if filteredWords && filteredWords.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (153:3) {#each word as letter}
+    // (158:3) {#each word as letter}
     function create_each_block_1(ctx) {
     	let div;
     	let t_value = /*letter*/ ctx[18] + "";
@@ -13617,7 +13620,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "letterbox svelte-kxi75n");
-    			add_location(div, file, 153, 4, 5625);
+    			add_location(div, file, 158, 4, 5813);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13635,14 +13638,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(153:3) {#each word as letter}",
+    		source: "(158:3) {#each word as letter}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (150:2) {#each displayedWords as word}
+    // (155:2) {#each displayedWords as word}
     function create_each_block(ctx) {
     	let br;
     	let t0;
@@ -13667,9 +13670,9 @@ var app = (function () {
     			}
 
     			t1 = space();
-    			add_location(br, file, 150, 3, 5569);
+    			add_location(br, file, 155, 3, 5757);
     			attr_dev(div, "class", "row svelte-kxi75n");
-    			add_location(div, file, 151, 3, 5577);
+    			add_location(div, file, 156, 3, 5765);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -13719,7 +13722,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(150:2) {#each displayedWords as word}",
+    		source: "(155:2) {#each displayedWords as word}",
     		ctx
     	});
 
@@ -13750,7 +13753,7 @@ var app = (function () {
     			t = space();
     			if (if_block) if_block.c();
     			attr_dev(main, "class", "svelte-kxi75n");
-    			add_location(main, file, 131, 0, 5096);
+    			add_location(main, file, 136, 0, 5284);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -13938,6 +13941,7 @@ var app = (function () {
     		let ratedAlphabet = new Map();
 
     		for (const letter of alphabet) {
+    			let used = letters[0].includes(letter);
     			let rating = new Array(wordLength + 1);
     			rating[wordLength] = words.filter(w => w.includes(letter)).length;
 
@@ -13946,7 +13950,13 @@ var app = (function () {
     				rating[i] += Math.pow(words.filter(w => Filters.wrongPosition(w, letter, i)).length, 2);
     				rating[i] += Math.pow(words.filter(w => Filters.notInWord(w, letter, i)).length, 2);
     				rating[i] /= totalNrOfWords;
+
+    				if (used) {
+    					rating[i] *= 1.5;
+    				}
     			}
+
+    			if (letters[0].find(l => l == letter)) ;
 
     			ratedAlphabet.set(letter, rating);
     		}
