@@ -2,7 +2,7 @@
 	import { Filters } from './Filters';
 	import { onMount } from 'Svelte';
 
-	import { wordsLengthFive } from './wordsLengthFive'
+	import { wordsLengthFive } from './wordsLengthFiveLong'
 
 	let words: string[] = wordsLengthFive;
 	let filteredWords: string[] = words;
@@ -12,7 +12,7 @@
 	let nrOfRows = 6;
 
 	let letters: string[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(""));
-	let filters: Function[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));;
+	let filters: Function[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
    	// onMount(async () => {
     //     // const response = await fetch("https://github.com/mrtnnrdlnd/wurdalurd/blob/main/public/words.json");
@@ -101,6 +101,7 @@
 		let ratedAlphabet: Map<string, number[]> = new Map();
 
 		for (const letter of alphabet) {
+			let used: boolean = letters[0].includes(letter);
 			let rating: number[] = new Array(wordLength + 1);
 			rating[wordLength] = words.filter((w) => w.includes(letter)).length;
 			for (let i = 0; i < wordLength; i++) {
@@ -108,6 +109,13 @@
 				rating[i] += Math.pow(words.filter((w) => Filters.wrongPosition(w, letter, i)).length, 2);
 				rating[i] += Math.pow(words.filter((w) => Filters.notInWord(w, letter, i)).length, 2);
 				rating[i] /= totalNrOfWords;
+				if (used) {
+					rating[i] *= 1.5;
+				}
+			}
+
+			if (letters[0].find((l) => l == letter)) {
+				
 			}
 
 			ratedAlphabet.set(letter, rating);
