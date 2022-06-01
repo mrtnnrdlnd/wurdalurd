@@ -12,7 +12,7 @@
 	let filters: Function[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));;
 
    	onMount(async () => {
-        const response = await fetch("words.json");
+        const response = await fetch("/blob/main/public/words.json");
         words = await response.json() as string[];
 		filteredWords = words;
 	});

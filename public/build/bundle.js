@@ -459,7 +459,7 @@ var app = (function () {
     			attr_dev(input, "id", /*i*/ ctx[23].toString().concat(/*j*/ ctx[25].toString()));
     			attr_dev(input, "maxlength", "1");
     			attr_dev(input, "class", "letterbox svelte-1npfsq9");
-    			add_location(input, file, 130, 4, 4810);
+    			add_location(input, file, 130, 4, 4828);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input, anchor);
@@ -524,8 +524,8 @@ var app = (function () {
     			t = space();
     			br = element("br");
     			attr_dev(div, "class", "row svelte-1npfsq9");
-    			add_location(div, file, 128, 2, 4760);
-    			add_location(br, file, 139, 2, 5055);
+    			add_location(div, file, 128, 2, 4778);
+    			add_location(br, file, 139, 2, 5073);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -609,8 +609,8 @@ var app = (function () {
     			}
 
     			each_1_anchor = empty();
-    			add_location(span, file, 143, 2, 5121);
-    			add_location(br, file, 143, 37, 5156);
+    			add_location(span, file, 143, 2, 5139);
+    			add_location(br, file, 143, 37, 5174);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -682,7 +682,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "letterbox svelte-1npfsq9");
-    			add_location(div, file, 148, 4, 5253);
+    			add_location(div, file, 148, 4, 5271);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -732,9 +732,9 @@ var app = (function () {
     			}
 
     			t1 = space();
-    			add_location(br, file, 145, 3, 5197);
+    			add_location(br, file, 145, 3, 5215);
     			attr_dev(div, "class", "row svelte-1npfsq9");
-    			add_location(div, file, 146, 3, 5205);
+    			add_location(div, file, 146, 3, 5223);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -814,7 +814,7 @@ var app = (function () {
 
     			t = space();
     			if (if_block) if_block.c();
-    			add_location(main, file, 126, 0, 4724);
+    			add_location(main, file, 126, 0, 4742);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -920,7 +920,7 @@ var app = (function () {
     	let filters = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
     	onMount(async () => {
-    		const response = await fetch("words.json");
+    		const response = await fetch("/blob/main/public/words.json");
     		$$invalidate(5, words = await response.json());
     		$$invalidate(0, filteredWords = words);
     	});
