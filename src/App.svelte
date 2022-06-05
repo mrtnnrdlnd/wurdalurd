@@ -19,8 +19,12 @@
     //     words = await response.json() as string[];
 	// 	filteredWords = words;
 	// });
+		// console.log(rateAlphabet(words))
+	// let benchmarkResult = benchmark(words);
+	// console.log(benchmarkResult);
+	// console.log(average(benchmarkResult));
 
-	// console.log(average(benchmark(words)));
+	console.log(ratedWords2(words, filteredWords));
 
 	function average(numbers: number[]): number {
 		let sum: number = 0;
@@ -35,17 +39,22 @@
 		let guess: string;
 		let attemts: number[] = [];
 
-		for (let i = 0; i < 500; i++) {
+		for (let i = 0; i < 1000; i++) {
 			filteredWords = words;
 			randomWord = pickRandomWord(words);
 
 			for (let attemt = 1; attemt <= 6; attemt++) {
 				
 				if (filteredWords.length > 0 && filteredWords.length <= 4) {
-					guess = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()][0];
+					// guess = [...ratedWords(filteredWords, filteredWords).keys()][0];
+					guess = [...ratedWords2(filteredWords, filteredWords).keys()][0];
+				}
+				else if (filteredWords.length > 2000) {
+					guess = "raise"
 				}
 				else if (filteredWords.length > 4) {
-					guess = [...ratedWords(words, rateAlphabet(filteredWords)).keys()][0];
+					// guess = [...ratedWords(words, filteredWords).keys()][0];
+					guess = [...ratedWords2(words, filteredWords).keys()][0];
 				}
 
 				if (guess == randomWord) {
@@ -76,7 +85,8 @@
 					return true;
 				});
 				
-			}			
+			}	
+			console.log(i);		
 		}
 
 		return attemts;
@@ -123,11 +133,13 @@
 	}
 
 	$: {
-		if (filteredWords.length > 0 && filteredWords.length <= 4) {
-			displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
+		if (filteredWords.length > 0) { // && filteredWords.length <= 4) {
+			displayedWords = [...ratedWords2(filteredWords, filteredWords).keys()].slice(0, 10)
+			// displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
 		}
 		else if (filteredWords.length > 4) {
-			displayedWords = [...ratedWords(words, rateAlphabet(filteredWords)).keys()].slice(0, 10)
+			displayedWords = [...ratedWords2(words, filteredWords).keys()].slice(0, 10)
+			// displayedWords = [...ratedWords(words, rateAlphabet(filteredWords)).keys()].slice(0, 10)
 		}
 	}
 
@@ -189,9 +201,11 @@
 		return ratedAlphabet;
 	}
 
-	function ratedWords(words: string[], ratedAlphabet: Map<string, number[]>): Map<string, number> {
+	function ratedWords(words: string[], filteredWords: string[]): Map<string, number> {
 		let ratedWords: Map<string, number> = new Map();
 		let sum: number;
+
+		let ratedAlphabet = rateAlphabet(filteredWords)
 
 
 		words.forEach((word) => {
@@ -207,6 +221,110 @@
 		})
 
 		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]))
+	}
+
+	function ratedWords2(words: string[], filteredWords: string[]): Map<string, number> {
+		let ratedWords: Map<string, number> = new Map(words.sort().map(w => [w, 0]));
+		let ratedLettersAtPosition: RatedLetterAtPosition[][] = Array(words[0].length).fill([]);
+
+		ratedLettersAtPosition.forEach((_, i) => {
+			ratedLettersAtPosition[i] = new Array<RatedLetterAtPosition>(Math.pow(3,i));
+		});
+
+		let sum;
+		let probabilitySum;
+		ratedWords.forEach((_, word) => {
+			sum = 0;
+			probabilitySum = 0;
+			word.toLocaleLowerCase().split("").forEach((letter, i) => {
+				if (i == 0) { 
+					ratedLettersAtPosition[i][i] = rateLetterAtPosition(filteredWords, letter, i);
+					// sum += ratedLettersAtPosition[i][i].notInWord.filteredWords.length * ratedLettersAtPosition[i][i].notInWord.probability
+					// sum += ratedLettersAtPosition[i][i].rightPosition.filteredWords.length * ratedLettersAtPosition[i][i].rightPosition.probability
+					// sum += ratedLettersAtPosition[i][i].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][i].wrongPosition.probability
+				}
+				else {
+					let nrOfFilteredWordDimensions = ratedLettersAtPosition[i - 1].length;
+					for (let j = 0; j < nrOfFilteredWordDimensions; j++) {	
+						ratedLettersAtPosition[i][j] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].notInWord.filteredWords, letter, i);
+						ratedLettersAtPosition[i][j].notInWord.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
+						ratedLettersAtPosition[i][j].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
+						ratedLettersAtPosition[i][j].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
+						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].rightPosition.filteredWords, letter, i);
+						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
+						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
+						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
+						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].wrongPosition.filteredWords, letter, i);
+						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
+						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
+						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
+
+						if (i == words[0].length - 1) {
+							// console.log(ratedLettersAtPosition[i])
+							sum += ratedLettersAtPosition[i][j].notInWord.filteredWords.length * ratedLettersAtPosition[i][j].notInWord.probability
+							sum += ratedLettersAtPosition[i][j].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j].rightPosition.probability
+							sum += ratedLettersAtPosition[i][j].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j].wrongPosition.probability
+
+							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.probability
+							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.probability
+							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.probability
+
+							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.probability
+							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.probability
+							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.probability
+							
+						}
+					}
+				}
+			})
+			ratedWords.set(word, sum);
+		})
+
+		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]))
+	}
+
+	interface RatingOfLetter {
+		probability: number,
+		filteredWords: string[]
+	}
+
+	interface RatedLetterAtPosition {
+		letter: string;
+		notInWord: RatingOfLetter,
+		rightPosition: RatingOfLetter,
+		wrongPosition: RatingOfLetter
+	}
+
+	function rateLetterAtPosition(words: string[], letter: string, position: number): RatedLetterAtPosition {
+		const unfilteredNrOfWords = words.length;
+		let ratedLetter: RatedLetterAtPosition = {
+			letter: letter,
+			notInWord: {
+				probability: 0,
+				filteredWords: words.filter((w) => Filters.notInWord(w, letter, position))
+			},
+			rightPosition: {
+				probability: 0,
+				filteredWords: words.filter((w) => Filters.rightPosition(w, letter, position))
+			},
+			wrongPosition: {
+				probability: 0,
+				filteredWords: words.filter((w) => Filters.wrongPosition(w, letter, position))
+			}
+		}
+		if (unfilteredNrOfWords) {
+			ratedLetter.notInWord.probability = ratedLetter.notInWord.filteredWords.length / unfilteredNrOfWords;
+			ratedLetter.rightPosition.probability = ratedLetter.rightPosition.filteredWords.length / unfilteredNrOfWords;
+			ratedLetter.wrongPosition.probability = ratedLetter.wrongPosition.filteredWords.length / unfilteredNrOfWords;
+		}
+		else {
+			ratedLetter.notInWord.probability = 0;
+			ratedLetter.rightPosition.probability = 0;
+			ratedLetter.wrongPosition.probability = 0;
+		}
+
+
+		return ratedLetter;
 	}
 
 	function handleInput(e: Event, i, j) {
@@ -248,6 +366,8 @@
 		</div>
 		<br>
 	{/each}
+
+	<button on:click="{() => console.log(rateAlphabet(filteredWords))}">rateAlphabet</button>
 
 	{#if filteredWords && filteredWords.length > 0}
 		<span>{filteredWords.length}</span><br>
