@@ -2713,61 +2713,61 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[18] = list[i];
+    	child_ctx[20] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[21] = list[i];
+    	child_ctx[23] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[24] = list[i];
-    	child_ctx[25] = list;
-    	child_ctx[26] = i;
-    	return child_ctx;
-    }
-
-    function get_each_context_3(ctx, list, i) {
-    	const child_ctx = ctx.slice();
-    	child_ctx[21] = list[i];
+    	child_ctx[26] = list[i];
     	child_ctx[27] = list;
     	child_ctx[28] = i;
     	return child_ctx;
     }
 
-    // (269:3) {#each row as letter, j}
+    function get_each_context_3(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[23] = list[i];
+    	child_ctx[29] = list;
+    	child_ctx[30] = i;
+    	return child_ctx;
+    }
+
+    // (270:3) {#each row as letter, j}
     function create_each_block_3(ctx) {
     	let input;
     	let mounted;
     	let dispose;
 
     	function input_input_handler() {
-    		/*input_input_handler*/ ctx[6].call(input, /*i*/ ctx[26], /*j*/ ctx[28]);
+    		/*input_input_handler*/ ctx[6].call(input, /*i*/ ctx[28], /*j*/ ctx[30]);
     	}
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[7](/*i*/ ctx[26], /*j*/ ctx[28]);
+    		return /*click_handler*/ ctx[7](/*i*/ ctx[28], /*j*/ ctx[30]);
     	}
 
     	function input_handler(...args) {
-    		return /*input_handler*/ ctx[8](/*i*/ ctx[26], /*j*/ ctx[28], ...args);
+    		return /*input_handler*/ ctx[8](/*i*/ ctx[28], /*j*/ ctx[30], ...args);
     	}
 
     	const block = {
     		c: function create() {
     			input = element("input");
-    			attr_dev(input, "id", /*i*/ ctx[26].toString().concat(/*j*/ ctx[28].toString()));
+    			attr_dev(input, "id", /*i*/ ctx[28].toString().concat(/*j*/ ctx[30].toString()));
     			attr_dev(input, "maxlength", "1");
     			attr_dev(input, "class", "letterbox svelte-kxi75n");
-    			add_location(input, file, 269, 4, 13065);
+    			add_location(input, file, 270, 4, 13030);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input, anchor);
-    			set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[26]][/*j*/ ctx[28]]);
+    			set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[28]][/*j*/ ctx[30]]);
 
     			if (!mounted) {
     				dispose = [
@@ -2782,8 +2782,8 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*letters*/ 2 && input.value !== /*letters*/ ctx[1][/*i*/ ctx[26]][/*j*/ ctx[28]]) {
-    				set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[26]][/*j*/ ctx[28]]);
+    			if (dirty & /*letters*/ 2 && input.value !== /*letters*/ ctx[1][/*i*/ ctx[28]][/*j*/ ctx[30]]) {
+    				set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[28]][/*j*/ ctx[30]]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -2797,19 +2797,19 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(269:3) {#each row as letter, j}",
+    		source: "(270:3) {#each row as letter, j}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (267:1) {#each letters as row, i}
+    // (268:1) {#each letters as row, i}
     function create_each_block_2(ctx) {
     	let div;
     	let t;
     	let br;
-    	let each_value_3 = /*row*/ ctx[24];
+    	let each_value_3 = /*row*/ ctx[26];
     	validate_each_argument(each_value_3);
     	let each_blocks = [];
 
@@ -2828,8 +2828,8 @@ var app = (function () {
     			t = space();
     			br = element("br");
     			attr_dev(div, "class", "row svelte-kxi75n");
-    			add_location(div, file, 267, 2, 13013);
-    			add_location(br, file, 278, 2, 13319);
+    			add_location(div, file, 268, 2, 12978);
+    			add_location(br, file, 279, 2, 13284);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2843,7 +2843,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*letters, toggleFilter, handleInput*/ 26) {
-    				each_value_3 = /*row*/ ctx[24];
+    				each_value_3 = /*row*/ ctx[26];
     				validate_each_argument(each_value_3);
     				let i;
 
@@ -2878,20 +2878,20 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(267:1) {#each letters as row, i}",
+    		source: "(268:1) {#each letters as row, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (284:1) {#if filteredWords && filteredWords.length > 0}
+    // (285:1) {#if filteredWords && filteredWords.length > 0}
     function create_if_block(ctx) {
     	let span;
-    	let t0_value = /*filteredWords*/ ctx[0].length + "";
-    	let t0;
+    	let t0_1_value = /*filteredWords*/ ctx[0].length + "";
+    	let t0_1;
     	let br;
-    	let t1;
+    	let t1_1;
     	let each_1_anchor;
     	let each_value = /*displayedWords*/ ctx[2];
     	validate_each_argument(each_value);
@@ -2904,23 +2904,23 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			span = element("span");
-    			t0 = text(t0_value);
+    			t0_1 = text(t0_1_value);
     			br = element("br");
-    			t1 = space();
+    			t1_1 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
     			each_1_anchor = empty();
-    			add_location(span, file, 284, 2, 13492);
-    			add_location(br, file, 284, 37, 13527);
+    			add_location(span, file, 285, 2, 13457);
+    			add_location(br, file, 285, 37, 13492);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
-    			append_dev(span, t0);
+    			append_dev(span, t0_1);
     			insert_dev(target, br, anchor);
-    			insert_dev(target, t1, anchor);
+    			insert_dev(target, t1_1, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(target, anchor);
@@ -2929,7 +2929,7 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*filteredWords*/ 1 && t0_value !== (t0_value = /*filteredWords*/ ctx[0].length + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*filteredWords*/ 1 && t0_1_value !== (t0_1_value = /*filteredWords*/ ctx[0].length + "")) set_data_dev(t0_1, t0_1_value);
 
     			if (dirty & /*displayedWords*/ 4) {
     				each_value = /*displayedWords*/ ctx[2];
@@ -2958,7 +2958,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(span);
     			if (detaching) detach_dev(br);
-    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(t1_1);
     			destroy_each(each_blocks, detaching);
     			if (detaching) detach_dev(each_1_anchor);
     		}
@@ -2968,17 +2968,17 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(284:1) {#if filteredWords && filteredWords.length > 0}",
+    		source: "(285:1) {#if filteredWords && filteredWords.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (289:3) {#each word as letter}
+    // (290:3) {#each word as letter}
     function create_each_block_1(ctx) {
     	let div;
-    	let t_value = /*letter*/ ctx[21] + "";
+    	let t_value = /*letter*/ ctx[23] + "";
     	let t;
 
     	const block = {
@@ -2986,14 +2986,14 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "letterbox svelte-kxi75n");
-    			add_location(div, file, 289, 4, 13629);
+    			add_location(div, file, 290, 4, 13594);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*displayedWords*/ 4 && t_value !== (t_value = /*letter*/ ctx[21] + "")) set_data_dev(t, t_value);
+    			if (dirty & /*displayedWords*/ 4 && t_value !== (t_value = /*letter*/ ctx[23] + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -3004,20 +3004,20 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(289:3) {#each word as letter}",
+    		source: "(290:3) {#each word as letter}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (286:2) {#each displayedWords as word}
+    // (287:2) {#each displayedWords as word}
     function create_each_block(ctx) {
     	let br;
-    	let t0;
+    	let t0_1;
     	let div;
-    	let t1;
-    	let each_value_1 = /*word*/ ctx[18];
+    	let t1_1;
+    	let each_value_1 = /*word*/ ctx[20];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -3028,32 +3028,32 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			br = element("br");
-    			t0 = space();
+    			t0_1 = space();
     			div = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t1 = space();
-    			add_location(br, file, 286, 3, 13570);
+    			t1_1 = space();
+    			add_location(br, file, 287, 3, 13535);
     			attr_dev(div, "class", "row svelte-kxi75n");
-    			add_location(div, file, 287, 3, 13579);
+    			add_location(div, file, 288, 3, 13544);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
-    			insert_dev(target, t0, anchor);
+    			insert_dev(target, t0_1, anchor);
     			insert_dev(target, div, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div, null);
     			}
 
-    			append_dev(div, t1);
+    			append_dev(div, t1_1);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*displayedWords*/ 4) {
-    				each_value_1 = /*word*/ ctx[18];
+    				each_value_1 = /*word*/ ctx[20];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -3065,7 +3065,7 @@ var app = (function () {
     					} else {
     						each_blocks[i] = create_each_block_1(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(div, t1);
+    						each_blocks[i].m(div, t1_1);
     					}
     				}
 
@@ -3078,7 +3078,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(br);
-    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(t0_1);
     			if (detaching) detach_dev(div);
     			destroy_each(each_blocks, detaching);
     		}
@@ -3088,7 +3088,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(286:2) {#each displayedWords as word}",
+    		source: "(287:2) {#each displayedWords as word}",
     		ctx
     	});
 
@@ -3119,7 +3119,7 @@ var app = (function () {
     			t = space();
     			if (if_block) if_block.c();
     			attr_dev(main, "class", "svelte-kxi75n");
-    			add_location(main, file, 265, 0, 12975);
+    			add_location(main, file, 266, 0, 12940);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3214,10 +3214,13 @@ var app = (function () {
     	let filters = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
     	// console.log(rateAlphabet(words))
-    	let benchmarkResult = benchmark(words);
+    	let t0 = performance.now();
 
+    	let benchmarkResult = benchmark(words);
     	console.log(benchmarkResult);
     	console.log(average(benchmarkResult));
+    	let t1 = performance.now();
+    	console.log(t1 - t0);
 
     	function benchmark(words) {
     		let filteredWords;
@@ -3231,12 +3234,12 @@ var app = (function () {
 
     			for (let attemt = 1; attemt <= 6; attemt++) {
     				// console.log(filteredWords.length)
-    				if (filteredWords.length > 0 && filteredWords.length <= 6) {
+    				if (filteredWords.length > 0 && filteredWords.length <= 4) {
     					// guess = [...ratedWords(filteredWords, filteredWords).keys()][0];
     					guess = [...ratedWords3(filteredWords, filteredWords).keys()][0];
     				} else if (filteredWords.length > 2000) {
     					guess = "raise";
-    				} else if (filteredWords.length > 6) {
+    				} else if (filteredWords.length > 4) {
     					// guess = [...ratedWords(words, filteredWords).keys()][0];
     					guess = [...ratedWords3(words, filteredWords).keys()][0];
     				}
@@ -3365,6 +3368,11 @@ var app = (function () {
     	// }
     	function rateWordRecursive(word, words, position, probability, ratedLetter) {
     		var _a;
+
+    		if (probability == 0) {
+    			return 0;
+    		}
+
     		let sum = 0;
 
     		let ratedLetterAtPosition = (_a = ratedLetter[0]) !== null && _a !== void 0
@@ -3409,10 +3417,6 @@ var app = (function () {
     			ratedLetter.notInWord.probability = ratedLetter.notInWord.filteredWords.length / unfilteredNrOfWords;
     			ratedLetter.rightPosition.probability = ratedLetter.rightPosition.filteredWords.length / unfilteredNrOfWords;
     			ratedLetter.wrongPosition.probability = ratedLetter.wrongPosition.filteredWords.length / unfilteredNrOfWords;
-    		} else {
-    			ratedLetter.notInWord.probability = 0;
-    			ratedLetter.rightPosition.probability = 0;
-    			ratedLetter.wrongPosition.probability = 0;
     		}
 
     		return ratedLetter;
@@ -3510,7 +3514,9 @@ var app = (function () {
     		nrOfRows,
     		letters,
     		filters,
+    		t0,
     		benchmarkResult,
+    		t1,
     		average,
     		benchmark,
     		pickRandomWord,
@@ -3530,7 +3536,9 @@ var app = (function () {
     		if ('nrOfRows' in $$props) $$invalidate(11, nrOfRows = $$props.nrOfRows);
     		if ('letters' in $$props) $$invalidate(1, letters = $$props.letters);
     		if ('filters' in $$props) $$invalidate(5, filters = $$props.filters);
+    		if ('t0' in $$props) t0 = $$props.t0;
     		if ('benchmarkResult' in $$props) benchmarkResult = $$props.benchmarkResult;
+    		if ('t1' in $$props) t1 = $$props.t1;
     	};
 
     	if ($$props && "$$inject" in $$props) {
