@@ -13,18 +13,12 @@
 	let letters: string[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(""));
 	let filters: Function[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
-   	// onMount(async () => {
-    //     // const response = await fetch("https://github.com/mrtnnrdlnd/wurdalurd/blob/main/public/words.json");
-	// 	const response = await fetch("words.json");
-    //     words = await response.json() as string[];
-	// 	filteredWords = words;
-	// });
 		// console.log(rateAlphabet(words))
 	// let benchmarkResult = benchmark(words);
 	// console.log(benchmarkResult);
 	// console.log(average(benchmarkResult));
 
-	console.log(ratedWords2(words, filteredWords));
+	// console.log(ratedWords3(words, filteredWords))
 
 	function average(numbers: number[]): number {
 		let sum: number = 0;
@@ -39,22 +33,23 @@
 		let guess: string;
 		let attemts: number[] = [];
 
-		for (let i = 0; i < 1000; i++) {
+		for (let i = 0; i < 100; i++) {
 			filteredWords = words;
 			randomWord = pickRandomWord(words);
 
 			for (let attemt = 1; attemt <= 6; attemt++) {
-				
+				// console.log(filteredWords.length)
 				if (filteredWords.length > 0 && filteredWords.length <= 4) {
 					// guess = [...ratedWords(filteredWords, filteredWords).keys()][0];
-					guess = [...ratedWords2(filteredWords, filteredWords).keys()][0];
+					guess = [...ratedWords3(filteredWords, filteredWords).keys()][0];
 				}
 				else if (filteredWords.length > 2000) {
 					guess = "raise"
 				}
 				else if (filteredWords.length > 4) {
 					// guess = [...ratedWords(words, filteredWords).keys()][0];
-					guess = [...ratedWords2(words, filteredWords).keys()][0];
+
+					guess = [...ratedWords3(words, filteredWords).keys()][0];
 				}
 
 				if (guess == randomWord) {
@@ -96,77 +91,10 @@
 		return words[Math.floor(Math.random()*words.length)]
 	}
 
-	function toggleFilter(row, column) {
-		let backgroundColor = "";
-		if (filters[row][column] == Filters.noFilter) {
-			filters[row][column] = Filters.notInWord;
-			backgroundColor = "lightgray";
-		}
-		else if (filters[row][column] == Filters.notInWord) {
-			filters[row][column] = Filters.wrongPosition;
-			backgroundColor = "orange";
-		}
-		else if (filters[row][column] == Filters.wrongPosition) {
-			filters[row][column] = Filters.rightPosition;
-			backgroundColor = "lightgreen";
-		}
-		else {
-			filters[row][column] = Filters.noFilter
-		}
-		document.getElementById(row.toString().concat(column)).style.backgroundColor = backgroundColor;
-	}
 
 
 
-	$: {
-		filteredWords = words.filter((w) => {
-			for (let row = 0; row < nrOfRows; row++) {
-				for (let column = 0; column < wordLength; column++) {
-					if (letters[row][column] != "" && !filters[row][column](w, letters[row][column].toLocaleLowerCase(), column)) {
-						return false;
-					}
-				}
-			}
-			return true;
-		});	
 
-	}
-
-	$: {
-		if (filteredWords.length > 0) { // && filteredWords.length <= 4) {
-			displayedWords = [...ratedWords2(filteredWords, filteredWords).keys()].slice(0, 10)
-			// displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
-		}
-		else if (filteredWords.length > 4) {
-			displayedWords = [...ratedWords2(words, filteredWords).keys()].slice(0, 10)
-			// displayedWords = [...ratedWords(words, rateAlphabet(filteredWords)).keys()].slice(0, 10)
-		}
-	}
-
-	// function findMostFilteringWord(fromWords: string[], inWords:string[]) {
-	// 	let filterScore: number = fromWords.length;
-	// 	let indexOfMostFilteringWord: number = 0;
-	// 	let wordLength = fromWords[0].length;
-
-	// 	fromWords.forEach((word, i) => {
-	// 		let filteredInWordsSize = inWords.filter((w) => {
-	// 			for (let column = 0; column < wordLength; column++) {
-	// 				if (w.includes(word.charAt(column))) {
-	// 					return false;
-	// 				}
-	// 			} 
-	// 			return true
-	// 		}).length;
-
-	// 		if (filteredInWordsSize > 0 && filterScore > filteredInWordsSize) {
-	// 			console.log(filteredInWordsSize)
-	// 			filterScore = filteredInWordsSize;
-	// 			indexOfMostFilteringWord = i;
-	// 		}
-	// 	})
-
-	// 	return fromWords[indexOfMostFilteringWord];
-	// }
 
 	const alphabet: string[] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 	
@@ -223,64 +151,41 @@
 		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]))
 	}
 
-	function ratedWords2(words: string[], filteredWords: string[]): Map<string, number> {
-		let ratedWords: Map<string, number> = new Map(words.sort().map(w => [w, 0]));
-		let ratedLettersAtPosition: RatedLetterAtPosition[][] = Array(words[0].length).fill([]);
+	function ratedWords3 (words: string[], filteredWords: string[]): Map<string, number> {
+		let sortedWords = words //.sort();
+		let ratedWords: Map<string, number> = new Map();
+		// let ratedLetter: RatedLetterAtPosition;
 
-		ratedLettersAtPosition.forEach((_, i) => {
-			ratedLettersAtPosition[i] = new Array<RatedLetterAtPosition>(Math.pow(3,i));
-		});
+		// ratedLetter = rateLetterAtPosition(filteredWords, sortedWords[0].charAt(0), 0);
 
-		let sum;
-		let probabilitySum;
-		ratedWords.forEach((_, word) => {
-			sum = 0;
-			probabilitySum = 0;
-			word.toLocaleLowerCase().split("").forEach((letter, i) => {
-				if (i == 0) { 
-					ratedLettersAtPosition[i][i] = rateLetterAtPosition(filteredWords, letter, i);
-					// sum += ratedLettersAtPosition[i][i].notInWord.filteredWords.length * ratedLettersAtPosition[i][i].notInWord.probability
-					// sum += ratedLettersAtPosition[i][i].rightPosition.filteredWords.length * ratedLettersAtPosition[i][i].rightPosition.probability
-					// sum += ratedLettersAtPosition[i][i].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][i].wrongPosition.probability
-				}
-				else {
-					let nrOfFilteredWordDimensions = ratedLettersAtPosition[i - 1].length;
-					for (let j = 0; j < nrOfFilteredWordDimensions; j++) {	
-						ratedLettersAtPosition[i][j] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].notInWord.filteredWords, letter, i);
-						ratedLettersAtPosition[i][j].notInWord.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
-						ratedLettersAtPosition[i][j].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
-						ratedLettersAtPosition[i][j].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
-						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].rightPosition.filteredWords, letter, i);
-						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
-						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
-						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
-						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].wrongPosition.filteredWords, letter, i);
-						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
-						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
-						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
-
-						if (i == words[0].length - 1) {
-							// console.log(ratedLettersAtPosition[i])
-							sum += ratedLettersAtPosition[i][j].notInWord.filteredWords.length * ratedLettersAtPosition[i][j].notInWord.probability
-							sum += ratedLettersAtPosition[i][j].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j].rightPosition.probability
-							sum += ratedLettersAtPosition[i][j].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j].wrongPosition.probability
-
-							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.probability
-							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.probability
-							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.probability
-
-							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.probability
-							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.probability
-							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.probability
-							
-						}
-					}
-				}
-			})
-			ratedWords.set(word, sum);
-		})
-
+		for (let i = 0; i < sortedWords.length; i++) {
+			const word = sortedWords[i];
+			// if (i > 0 && sortedWords[i - 1].charAt(0) != sortedWords[i].charAt(0)) {
+			// 	ratedLetter = rateLetterAtPosition(sortedWords, sortedWords[i].charAt(0), 0);
+			// }
+			ratedWords.set(sortedWords[i], rateWordReqursive(word, filteredWords, 0, 1));
+		}
 		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]))
+	}
+
+	function rateWordReqursive(word: string, words: string[], position: number, probability: number, ratedLetter?: RatedLetterAtPosition): number {
+		if(probability < 0.0001) {
+			return 0;
+		}
+
+		let sum = 0;
+		let ratedLetterAtPosition: RatedLetterAtPosition = ratedLetter ?? rateLetterAtPosition(words, word.charAt(position), position);
+		if (position == word.length - 1) {
+			sum += ratedLetterAtPosition.notInWord.filteredWords.length * ratedLetterAtPosition.notInWord.probability * probability;
+			sum += ratedLetterAtPosition.rightPosition.filteredWords.length * ratedLetterAtPosition.rightPosition.probability * probability;
+			sum += ratedLetterAtPosition.wrongPosition.filteredWords.length * ratedLetterAtPosition.wrongPosition.probability * probability;
+		}
+		if (position < word.length - 1) {
+			sum += rateWordReqursive(word, ratedLetterAtPosition.notInWord.filteredWords, position + 1, ratedLetterAtPosition.notInWord.probability * probability);
+			sum += rateWordReqursive(word, ratedLetterAtPosition.rightPosition.filteredWords, position + 1, ratedLetterAtPosition.rightPosition.probability * probability);
+			sum += rateWordReqursive(word, ratedLetterAtPosition.wrongPosition.filteredWords, position + 1, ratedLetterAtPosition.wrongPosition.probability * probability);
+		}
+		return sum;
 	}
 
 	interface RatingOfLetter {
@@ -327,6 +232,13 @@
 		return ratedLetter;
 	}
 
+
+
+
+
+
+	// View stuffs
+	
 	function handleInput(e: Event, i, j) {
 		let inputEvent = e as InputEvent;
 		if (inputEvent.data == null) {
@@ -347,6 +259,51 @@
 			document.getElementById((i + 1).toString().concat((0).toString())).focus();
 		}
 		
+	}
+
+	function toggleFilter(row, column) {
+		let backgroundColor = "";
+		if (filters[row][column] == Filters.noFilter) {
+			filters[row][column] = Filters.notInWord;
+			backgroundColor = "lightgray";
+		}
+		else if (filters[row][column] == Filters.notInWord) {
+			filters[row][column] = Filters.wrongPosition;
+			backgroundColor = "orange";
+		}
+		else if (filters[row][column] == Filters.wrongPosition) {
+			filters[row][column] = Filters.rightPosition;
+			backgroundColor = "lightgreen";
+		}
+		else {
+			filters[row][column] = Filters.noFilter
+		}
+		document.getElementById(row.toString().concat(column)).style.backgroundColor = backgroundColor;
+	}
+
+	$: {
+		filteredWords = words.filter((w) => {
+			for (let row = 0; row < nrOfRows; row++) {
+				for (let column = 0; column < wordLength; column++) {
+					if (letters[row][column] != "" && !filters[row][column](w, letters[row][column].toLocaleLowerCase(), column)) {
+						return false;
+					}
+				}
+			}
+			return true;
+		});	
+
+	}
+
+	$: {
+		if (filteredWords.length > 0) { // && filteredWords.length <= 4) {
+			displayedWords = [...ratedWords3(filteredWords, filteredWords).keys()].slice(0, 10)
+			// displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
+		}
+		else if (filteredWords.length > 4) {
+			displayedWords = [...ratedWords3(words, filteredWords).keys()].slice(0, 10)
+			// displayedWords = [...ratedWords(words, rateAlphabet(filteredWords)).keys()].slice(0, 10)
+		}
 	}
 
 </script>
