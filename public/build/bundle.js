@@ -214,7 +214,7 @@ var app = (function () {
         }
         component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
     }
-    function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty = [-1]) {
+    function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty) {
         const parent_component = current_component;
         set_current_component(component);
         const $$ = component.$$ = {
@@ -2713,61 +2713,61 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[20] = list[i];
+    	child_ctx[21] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[23] = list[i];
+    	child_ctx[24] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[26] = list[i];
-    	child_ctx[27] = list;
-    	child_ctx[28] = i;
+    	child_ctx[27] = list[i];
+    	child_ctx[28] = list;
+    	child_ctx[29] = i;
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[23] = list[i];
-    	child_ctx[29] = list;
-    	child_ctx[30] = i;
+    	child_ctx[24] = list[i];
+    	child_ctx[30] = list;
+    	child_ctx[31] = i;
     	return child_ctx;
     }
 
-    // (285:3) {#each row as letter, j}
+    // (240:3) {#each row as letter, j}
     function create_each_block_3(ctx) {
     	let input;
     	let mounted;
     	let dispose;
 
     	function input_input_handler() {
-    		/*input_input_handler*/ ctx[7].call(input, /*i*/ ctx[28], /*j*/ ctx[30]);
+    		/*input_input_handler*/ ctx[7].call(input, /*i*/ ctx[29], /*j*/ ctx[31]);
     	}
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[8](/*i*/ ctx[28], /*j*/ ctx[30]);
+    		return /*click_handler*/ ctx[8](/*i*/ ctx[29], /*j*/ ctx[31]);
     	}
 
     	function input_handler(...args) {
-    		return /*input_handler*/ ctx[9](/*i*/ ctx[28], /*j*/ ctx[30], ...args);
+    		return /*input_handler*/ ctx[9](/*i*/ ctx[29], /*j*/ ctx[31], ...args);
     	}
 
     	const block = {
     		c: function create() {
     			input = element("input");
-    			attr_dev(input, "id", /*i*/ ctx[28].toString().concat(/*j*/ ctx[30].toString()));
+    			attr_dev(input, "id", /*i*/ ctx[29].toString().concat(/*j*/ ctx[31].toString()));
     			attr_dev(input, "maxlength", "1");
     			attr_dev(input, "class", "letterbox svelte-kxi75n");
-    			add_location(input, file, 285, 4, 14475);
+    			add_location(input, file, 240, 4, 10345);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input, anchor);
-    			set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[28]][/*j*/ ctx[30]]);
+    			set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[29]][/*j*/ ctx[31]]);
 
     			if (!mounted) {
     				dispose = [
@@ -2782,8 +2782,8 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty & /*letters*/ 2 && input.value !== /*letters*/ ctx[1][/*i*/ ctx[28]][/*j*/ ctx[30]]) {
-    				set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[28]][/*j*/ ctx[30]]);
+    			if (dirty[0] & /*letters*/ 2 && input.value !== /*letters*/ ctx[1][/*i*/ ctx[29]][/*j*/ ctx[31]]) {
+    				set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[29]][/*j*/ ctx[31]]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -2797,19 +2797,19 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(285:3) {#each row as letter, j}",
+    		source: "(240:3) {#each row as letter, j}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (283:1) {#each letters as row, i}
+    // (238:1) {#each letters as row, i}
     function create_each_block_2(ctx) {
     	let div;
     	let t;
     	let br;
-    	let each_value_3 = /*row*/ ctx[26];
+    	let each_value_3 = /*row*/ ctx[27];
     	validate_each_argument(each_value_3);
     	let each_blocks = [];
 
@@ -2828,8 +2828,8 @@ var app = (function () {
     			t = space();
     			br = element("br");
     			attr_dev(div, "class", "row svelte-kxi75n");
-    			add_location(div, file, 283, 2, 14423);
-    			add_location(br, file, 294, 2, 14729);
+    			add_location(div, file, 238, 2, 10293);
+    			add_location(br, file, 249, 2, 10599);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2842,8 +2842,8 @@ var app = (function () {
     			insert_dev(target, br, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*letters, toggleFilter, handleInput*/ 42) {
-    				each_value_3 = /*row*/ ctx[26];
+    			if (dirty[0] & /*letters, toggleFilter, handleInput*/ 50) {
+    				each_value_3 = /*row*/ ctx[27];
     				validate_each_argument(each_value_3);
     				let i;
 
@@ -2878,14 +2878,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(283:1) {#each letters as row, i}",
+    		source: "(238:1) {#each letters as row, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (300:1) {#if filteredWords && filteredWords.length > 0}
+    // (255:1) {#if filteredWords && filteredWords.length > 0}
     function create_if_block(ctx) {
     	let span;
     	let t0_value = /*filteredWords*/ ctx[0].length + "";
@@ -2913,8 +2913,8 @@ var app = (function () {
     			}
 
     			each_1_anchor = empty();
-    			add_location(span, file, 300, 2, 14893);
-    			add_location(br, file, 300, 37, 14928);
+    			add_location(span, file, 255, 2, 10763);
+    			add_location(br, file, 255, 37, 10798);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -2929,9 +2929,9 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*filteredWords*/ 1 && t0_value !== (t0_value = /*filteredWords*/ ctx[0].length + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*filteredWords*/ 1 && t0_value !== (t0_value = /*filteredWords*/ ctx[0].length + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty & /*displayedWords*/ 4) {
+    			if (dirty[0] & /*displayedWords*/ 4) {
     				each_value = /*displayedWords*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
@@ -2968,17 +2968,17 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(300:1) {#if filteredWords && filteredWords.length > 0}",
+    		source: "(255:1) {#if filteredWords && filteredWords.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (305:3) {#each word as letter}
+    // (260:3) {#each word as letter}
     function create_each_block_1(ctx) {
     	let div;
-    	let t_value = /*letter*/ ctx[23] + "";
+    	let t_value = /*letter*/ ctx[24] + "";
     	let t;
 
     	const block = {
@@ -2986,14 +2986,14 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "letterbox svelte-kxi75n");
-    			add_location(div, file, 305, 4, 15030);
+    			add_location(div, file, 260, 4, 10900);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*displayedWords*/ 4 && t_value !== (t_value = /*letter*/ ctx[23] + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*displayedWords*/ 4 && t_value !== (t_value = /*letter*/ ctx[24] + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -3004,20 +3004,20 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(305:3) {#each word as letter}",
+    		source: "(260:3) {#each word as letter}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (302:2) {#each displayedWords as word}
+    // (257:2) {#each displayedWords as word}
     function create_each_block(ctx) {
     	let br;
     	let t0;
     	let div;
     	let t1;
-    	let each_value_1 = /*word*/ ctx[20];
+    	let each_value_1 = /*word*/ ctx[21];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -3036,9 +3036,9 @@ var app = (function () {
     			}
 
     			t1 = space();
-    			add_location(br, file, 302, 3, 14971);
+    			add_location(br, file, 257, 3, 10841);
     			attr_dev(div, "class", "row svelte-kxi75n");
-    			add_location(div, file, 303, 3, 14980);
+    			add_location(div, file, 258, 3, 10850);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -3052,8 +3052,8 @@ var app = (function () {
     			append_dev(div, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*displayedWords*/ 4) {
-    				each_value_1 = /*word*/ ctx[20];
+    			if (dirty[0] & /*displayedWords*/ 4) {
+    				each_value_1 = /*word*/ ctx[21];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -3088,7 +3088,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(302:2) {#each displayedWords as word}",
+    		source: "(257:2) {#each displayedWords as word}",
     		ctx
     	});
 
@@ -3125,9 +3125,9 @@ var app = (function () {
     			button.textContent = "rateAlphabet";
     			t2 = space();
     			if (if_block) if_block.c();
-    			add_location(button, file, 297, 1, 14748);
+    			add_location(button, file, 252, 1, 10618);
     			attr_dev(main, "class", "svelte-kxi75n");
-    			add_location(main, file, 281, 0, 14385);
+    			add_location(main, file, 236, 0, 10255);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3149,8 +3149,8 @@ var app = (function () {
     				mounted = true;
     			}
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (dirty & /*letters, toggleFilter, handleInput*/ 42) {
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*letters, toggleFilter, handleInput*/ 50) {
     				each_value_2 = /*letters*/ ctx[1];
     				validate_each_argument(each_value_2);
     				let i;
@@ -3230,37 +3230,26 @@ var app = (function () {
     	let letters = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(""));
     	let filters = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
-    	// onMount(async () => {
-    	//     // const response = await fetch("https://github.com/mrtnnrdlnd/wurdalurd/blob/main/public/words.json");
-    	// 	const response = await fetch("words.json");
-    	//     words = await response.json() as string[];
-    	// 	filteredWords = words;
-    	// });
-    	// console.log(rateAlphabet(words))
-    	// let benchmarkResult = benchmark(words);
-    	// console.log(benchmarkResult);
-    	// console.log(average(benchmarkResult));
-    	console.log(ratedWords2(words, filteredWords));
-
     	function benchmark(words) {
     		let filteredWords;
     		let randomWord;
     		let guess;
     		let attemts = [];
 
-    		for (let i = 0; i < 1000; i++) {
+    		for (let i = 0; i < 100; i++) {
     			filteredWords = words;
     			randomWord = pickRandomWord(words);
 
     			for (let attemt = 1; attemt <= 6; attemt++) {
+    				// console.log(filteredWords.length)
     				if (filteredWords.length > 0 && filteredWords.length <= 4) {
     					// guess = [...ratedWords(filteredWords, filteredWords).keys()][0];
-    					guess = [...ratedWords2(filteredWords, filteredWords).keys()][0];
+    					guess = [...ratedWords3(filteredWords, filteredWords).keys()][0];
     				} else if (filteredWords.length > 2000) {
     					guess = "raise";
     				} else if (filteredWords.length > 4) {
     					// guess = [...ratedWords(words, filteredWords).keys()][0];
-    					guess = [...ratedWords2(words, filteredWords).keys()][0];
+    					guess = [...ratedWords3(words, filteredWords).keys()][0];
     				}
 
     				if (guess == randomWord) {
@@ -3301,46 +3290,6 @@ var app = (function () {
     		return attemts;
     	}
 
-    	function toggleFilter(row, column) {
-    		let backgroundColor = "";
-
-    		if (filters[row][column] == Filters.noFilter) {
-    			$$invalidate(6, filters[row][column] = Filters.notInWord, filters);
-    			backgroundColor = "lightgray";
-    		} else if (filters[row][column] == Filters.notInWord) {
-    			$$invalidate(6, filters[row][column] = Filters.wrongPosition, filters);
-    			backgroundColor = "orange";
-    		} else if (filters[row][column] == Filters.wrongPosition) {
-    			$$invalidate(6, filters[row][column] = Filters.rightPosition, filters);
-    			backgroundColor = "lightgreen";
-    		} else {
-    			$$invalidate(6, filters[row][column] = Filters.noFilter, filters);
-    		}
-
-    		document.getElementById(row.toString().concat(column)).style.backgroundColor = backgroundColor;
-    	}
-
-    	// function findMostFilteringWord(fromWords: string[], inWords:string[]) {
-    	// 	let filterScore: number = fromWords.length;
-    	// 	let indexOfMostFilteringWord: number = 0;
-    	// 	let wordLength = fromWords[0].length;
-    	// 	fromWords.forEach((word, i) => {
-    	// 		let filteredInWordsSize = inWords.filter((w) => {
-    	// 			for (let column = 0; column < wordLength; column++) {
-    	// 				if (w.includes(word.charAt(column))) {
-    	// 					return false;
-    	// 				}
-    	// 			} 
-    	// 			return true
-    	// 		}).length;
-    	// 		if (filteredInWordsSize > 0 && filterScore > filteredInWordsSize) {
-    	// 			console.log(filteredInWordsSize)
-    	// 			filterScore = filteredInWordsSize;
-    	// 			indexOfMostFilteringWord = i;
-    	// 		}
-    	// 	})
-    	// 	return fromWords[indexOfMostFilteringWord];
-    	// }
     	const alphabet = [
     		"a",
     		"b",
@@ -3449,62 +3398,48 @@ var app = (function () {
     		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]));
     	}
 
-    	function ratedWords2(words, filteredWords) {
-    		let ratedWords = new Map(words.sort().map(w => [w, 0]));
-    		let ratedLettersAtPosition = Array(words[0].length).fill([]);
+    	function ratedWords3(words, filteredWords) {
+    		let sortedWords = words; //.sort();
+    		let ratedWords = new Map();
 
-    		ratedLettersAtPosition.forEach((_, i) => {
-    			ratedLettersAtPosition[i] = new Array(Math.pow(3, i));
-    		});
+    		// let ratedLetter: RatedLetterAtPosition;
+    		// ratedLetter = rateLetterAtPosition(filteredWords, sortedWords[0].charAt(0), 0);
+    		for (let i = 0; i < sortedWords.length; i++) {
+    			const word = sortedWords[i];
 
-    		let sum;
-
-    		ratedWords.forEach((_, word) => {
-    			sum = 0;
-
-    			word.toLocaleLowerCase().split("").forEach((letter, i) => {
-    				if (i == 0) {
-    					ratedLettersAtPosition[i][i] = rateLetterAtPosition(filteredWords, letter, i);
-    				} else // sum += ratedLettersAtPosition[i][i].rightPosition.filteredWords.length * ratedLettersAtPosition[i][i].rightPosition.probability
-    				// sum += ratedLettersAtPosition[i][i].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][i].wrongPosition.probability
-    				{
-    					let nrOfFilteredWordDimensions = ratedLettersAtPosition[i - 1].length; // sum += ratedLettersAtPosition[i][i].notInWord.filteredWords.length * ratedLettersAtPosition[i][i].notInWord.probability
-
-    					for (let j = 0; j < nrOfFilteredWordDimensions; j++) {
-    						ratedLettersAtPosition[i][j] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].notInWord.filteredWords, letter, i);
-    						ratedLettersAtPosition[i][j].notInWord.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
-    						ratedLettersAtPosition[i][j].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
-    						ratedLettersAtPosition[i][j].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].notInWord.probability;
-    						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].rightPosition.filteredWords, letter, i);
-    						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
-    						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
-    						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].rightPosition.probability;
-    						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2] = rateLetterAtPosition(ratedLettersAtPosition[i - 1][j].wrongPosition.filteredWords, letter, i);
-    						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
-    						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
-    						ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.probability *= ratedLettersAtPosition[i - 1][j].wrongPosition.probability;
-
-    						if (i == words[0].length - 1) {
-    							// console.log(ratedLettersAtPosition[i])
-    							sum += ratedLettersAtPosition[i][j].notInWord.filteredWords.length * ratedLettersAtPosition[i][j].notInWord.probability;
-
-    							sum += ratedLettersAtPosition[i][j].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j].rightPosition.probability;
-    							sum += ratedLettersAtPosition[i][j].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j].wrongPosition.probability;
-    							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].notInWord.probability;
-    							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].rightPosition.probability;
-    							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions].wrongPosition.probability;
-    							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].notInWord.probability;
-    							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].rightPosition.probability;
-    							sum += ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.filteredWords.length * ratedLettersAtPosition[i][j + nrOfFilteredWordDimensions * 2].wrongPosition.probability;
-    						}
-    					}
-    				}
-    			});
-
-    			ratedWords.set(word, sum);
-    		});
+    			// if (i > 0 && sortedWords[i - 1].charAt(0) != sortedWords[i].charAt(0)) {
+    			// 	ratedLetter = rateLetterAtPosition(sortedWords, sortedWords[i].charAt(0), 0);
+    			// }
+    			ratedWords.set(sortedWords[i], rateWordReqursive(word, filteredWords, 0, 1));
+    		}
 
     		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]));
+    	}
+
+    	function rateWordReqursive(word, words, position, probability, ratedLetter) {
+    		if (probability < 0.0001) {
+    			return 0;
+    		}
+
+    		let sum = 0;
+
+    		let ratedLetterAtPosition = ratedLetter !== null && ratedLetter !== void 0
+    		? ratedLetter
+    		: rateLetterAtPosition(words, word.charAt(position), position);
+
+    		if (position == word.length - 1) {
+    			sum += ratedLetterAtPosition.notInWord.filteredWords.length * ratedLetterAtPosition.notInWord.probability * probability;
+    			sum += ratedLetterAtPosition.rightPosition.filteredWords.length * ratedLetterAtPosition.rightPosition.probability * probability;
+    			sum += ratedLetterAtPosition.wrongPosition.filteredWords.length * ratedLetterAtPosition.wrongPosition.probability * probability;
+    		}
+
+    		if (position < word.length - 1) {
+    			sum += rateWordReqursive(word, ratedLetterAtPosition.notInWord.filteredWords, position + 1, ratedLetterAtPosition.notInWord.probability * probability);
+    			sum += rateWordReqursive(word, ratedLetterAtPosition.rightPosition.filteredWords, position + 1, ratedLetterAtPosition.rightPosition.probability * probability);
+    			sum += rateWordReqursive(word, ratedLetterAtPosition.wrongPosition.filteredWords, position + 1, ratedLetterAtPosition.wrongPosition.probability * probability);
+    		}
+
+    		return sum;
     	}
 
     	function rateLetterAtPosition(words, letter, position) {
@@ -3539,6 +3474,7 @@ var app = (function () {
     		return ratedLetter;
     	}
 
+    	// View stuffs
     	function handleInput(e, i, j) {
     		let inputEvent = e;
 
@@ -3556,6 +3492,25 @@ var app = (function () {
     		} else {
     			document.getElementById((i + 1).toString().concat((0).toString())).focus();
     		}
+    	}
+
+    	function toggleFilter(row, column) {
+    		let backgroundColor = "";
+
+    		if (filters[row][column] == Filters.noFilter) {
+    			$$invalidate(6, filters[row][column] = Filters.notInWord, filters);
+    			backgroundColor = "lightgray";
+    		} else if (filters[row][column] == Filters.notInWord) {
+    			$$invalidate(6, filters[row][column] = Filters.wrongPosition, filters);
+    			backgroundColor = "orange";
+    		} else if (filters[row][column] == Filters.wrongPosition) {
+    			$$invalidate(6, filters[row][column] = Filters.rightPosition, filters);
+    			backgroundColor = "lightgreen";
+    		} else {
+    			$$invalidate(6, filters[row][column] = Filters.noFilter, filters);
+    		}
+
+    		document.getElementById(row.toString().concat(column)).style.backgroundColor = backgroundColor;
     	}
 
     	const writable_props = [];
@@ -3586,14 +3541,15 @@ var app = (function () {
     		average,
     		benchmark,
     		pickRandomWord,
-    		toggleFilter,
     		alphabet,
     		rateAlphabet,
     		ratedWords,
-    		ratedWords2,
+    		ratedWords3,
+    		rateWordReqursive,
     		rateLetterAtPosition,
     		handleInput,
-    		focusNext
+    		focusNext,
+    		toggleFilter
     	});
 
     	$$self.$inject_state = $$props => {
@@ -3611,7 +3567,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*letters, filters*/ 66) {
+    		if ($$self.$$.dirty[0] & /*letters, filters*/ 66) {
     			{
     				$$invalidate(0, filteredWords = words.filter(w => {
     					for (let row = 0; row < nrOfRows; row++) {
@@ -3627,13 +3583,13 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty & /*filteredWords*/ 1) {
+    		if ($$self.$$.dirty[0] & /*filteredWords*/ 1) {
     			{
     				if (filteredWords.length > 0) {
     					// && filteredWords.length <= 4) {
-    					$$invalidate(2, displayedWords = [...ratedWords2(filteredWords, filteredWords).keys()].slice(0, 10));
+    					$$invalidate(2, displayedWords = [...ratedWords3(filteredWords, filteredWords).keys()].slice(0, 10));
     				} else if (filteredWords.length > 4) {
-    					$$invalidate(2, displayedWords = [...ratedWords2(words, filteredWords).keys()].slice(0, 10)); // displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
+    					$$invalidate(2, displayedWords = [...ratedWords3(words, filteredWords).keys()].slice(0, 10)); // displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
     				} // displayedWords = [...ratedWords(words, rateAlphabet(filteredWords)).keys()].slice(0, 10)
     			}
     		}
@@ -3643,9 +3599,9 @@ var app = (function () {
     		filteredWords,
     		letters,
     		displayedWords,
-    		toggleFilter,
     		rateAlphabet,
     		handleInput,
+    		toggleFilter,
     		filters,
     		input_input_handler,
     		click_handler,
@@ -3657,7 +3613,7 @@ var app = (function () {
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance, create_fragment, safe_not_equal, {});
+    		init(this, options, instance, create_fragment, safe_not_equal, {}, null, [-1, -1]);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
