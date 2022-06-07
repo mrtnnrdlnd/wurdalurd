@@ -214,7 +214,7 @@ var app = (function () {
         }
         component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
     }
-    function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty) {
+    function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty = [-1]) {
         const parent_component = current_component;
         set_current_component(component);
         const $$ = component.$$ = {
@@ -2713,61 +2713,61 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[21] = list[i];
+    	child_ctx[18] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[24] = list[i];
+    	child_ctx[21] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[27] = list[i];
-    	child_ctx[28] = list;
-    	child_ctx[29] = i;
+    	child_ctx[24] = list[i];
+    	child_ctx[25] = list;
+    	child_ctx[26] = i;
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[24] = list[i];
-    	child_ctx[30] = list;
-    	child_ctx[31] = i;
+    	child_ctx[21] = list[i];
+    	child_ctx[27] = list;
+    	child_ctx[28] = i;
     	return child_ctx;
     }
 
-    // (240:3) {#each row as letter, j}
+    // (269:3) {#each row as letter, j}
     function create_each_block_3(ctx) {
     	let input;
     	let mounted;
     	let dispose;
 
     	function input_input_handler() {
-    		/*input_input_handler*/ ctx[7].call(input, /*i*/ ctx[29], /*j*/ ctx[31]);
+    		/*input_input_handler*/ ctx[6].call(input, /*i*/ ctx[26], /*j*/ ctx[28]);
     	}
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[8](/*i*/ ctx[29], /*j*/ ctx[31]);
+    		return /*click_handler*/ ctx[7](/*i*/ ctx[26], /*j*/ ctx[28]);
     	}
 
     	function input_handler(...args) {
-    		return /*input_handler*/ ctx[9](/*i*/ ctx[29], /*j*/ ctx[31], ...args);
+    		return /*input_handler*/ ctx[8](/*i*/ ctx[26], /*j*/ ctx[28], ...args);
     	}
 
     	const block = {
     		c: function create() {
     			input = element("input");
-    			attr_dev(input, "id", /*i*/ ctx[29].toString().concat(/*j*/ ctx[31].toString()));
+    			attr_dev(input, "id", /*i*/ ctx[26].toString().concat(/*j*/ ctx[28].toString()));
     			attr_dev(input, "maxlength", "1");
     			attr_dev(input, "class", "letterbox svelte-kxi75n");
-    			add_location(input, file, 240, 4, 10345);
+    			add_location(input, file, 269, 4, 13065);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input, anchor);
-    			set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[29]][/*j*/ ctx[31]]);
+    			set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[26]][/*j*/ ctx[28]]);
 
     			if (!mounted) {
     				dispose = [
@@ -2782,8 +2782,8 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty[0] & /*letters*/ 2 && input.value !== /*letters*/ ctx[1][/*i*/ ctx[29]][/*j*/ ctx[31]]) {
-    				set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[29]][/*j*/ ctx[31]]);
+    			if (dirty & /*letters*/ 2 && input.value !== /*letters*/ ctx[1][/*i*/ ctx[26]][/*j*/ ctx[28]]) {
+    				set_input_value(input, /*letters*/ ctx[1][/*i*/ ctx[26]][/*j*/ ctx[28]]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -2797,19 +2797,19 @@ var app = (function () {
     		block,
     		id: create_each_block_3.name,
     		type: "each",
-    		source: "(240:3) {#each row as letter, j}",
+    		source: "(269:3) {#each row as letter, j}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (238:1) {#each letters as row, i}
+    // (267:1) {#each letters as row, i}
     function create_each_block_2(ctx) {
     	let div;
     	let t;
     	let br;
-    	let each_value_3 = /*row*/ ctx[27];
+    	let each_value_3 = /*row*/ ctx[24];
     	validate_each_argument(each_value_3);
     	let each_blocks = [];
 
@@ -2828,8 +2828,8 @@ var app = (function () {
     			t = space();
     			br = element("br");
     			attr_dev(div, "class", "row svelte-kxi75n");
-    			add_location(div, file, 238, 2, 10293);
-    			add_location(br, file, 249, 2, 10599);
+    			add_location(div, file, 267, 2, 13013);
+    			add_location(br, file, 278, 2, 13319);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2842,8 +2842,8 @@ var app = (function () {
     			insert_dev(target, br, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*letters, toggleFilter, handleInput*/ 50) {
-    				each_value_3 = /*row*/ ctx[27];
+    			if (dirty & /*letters, toggleFilter, handleInput*/ 26) {
+    				each_value_3 = /*row*/ ctx[24];
     				validate_each_argument(each_value_3);
     				let i;
 
@@ -2878,14 +2878,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(238:1) {#each letters as row, i}",
+    		source: "(267:1) {#each letters as row, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (255:1) {#if filteredWords && filteredWords.length > 0}
+    // (284:1) {#if filteredWords && filteredWords.length > 0}
     function create_if_block(ctx) {
     	let span;
     	let t0_value = /*filteredWords*/ ctx[0].length + "";
@@ -2913,8 +2913,8 @@ var app = (function () {
     			}
 
     			each_1_anchor = empty();
-    			add_location(span, file, 255, 2, 10763);
-    			add_location(br, file, 255, 37, 10798);
+    			add_location(span, file, 284, 2, 13492);
+    			add_location(br, file, 284, 37, 13527);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -2929,9 +2929,9 @@ var app = (function () {
     			insert_dev(target, each_1_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*filteredWords*/ 1 && t0_value !== (t0_value = /*filteredWords*/ ctx[0].length + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*filteredWords*/ 1 && t0_value !== (t0_value = /*filteredWords*/ ctx[0].length + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*displayedWords*/ 4) {
+    			if (dirty & /*displayedWords*/ 4) {
     				each_value = /*displayedWords*/ ctx[2];
     				validate_each_argument(each_value);
     				let i;
@@ -2968,17 +2968,17 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(255:1) {#if filteredWords && filteredWords.length > 0}",
+    		source: "(284:1) {#if filteredWords && filteredWords.length > 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (260:3) {#each word as letter}
+    // (289:3) {#each word as letter}
     function create_each_block_1(ctx) {
     	let div;
-    	let t_value = /*letter*/ ctx[24] + "";
+    	let t_value = /*letter*/ ctx[21] + "";
     	let t;
 
     	const block = {
@@ -2986,14 +2986,14 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "letterbox svelte-kxi75n");
-    			add_location(div, file, 260, 4, 10900);
+    			add_location(div, file, 289, 4, 13629);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*displayedWords*/ 4 && t_value !== (t_value = /*letter*/ ctx[24] + "")) set_data_dev(t, t_value);
+    			if (dirty & /*displayedWords*/ 4 && t_value !== (t_value = /*letter*/ ctx[21] + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -3004,20 +3004,20 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(260:3) {#each word as letter}",
+    		source: "(289:3) {#each word as letter}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (257:2) {#each displayedWords as word}
+    // (286:2) {#each displayedWords as word}
     function create_each_block(ctx) {
     	let br;
     	let t0;
     	let div;
     	let t1;
-    	let each_value_1 = /*word*/ ctx[21];
+    	let each_value_1 = /*word*/ ctx[18];
     	validate_each_argument(each_value_1);
     	let each_blocks = [];
 
@@ -3036,9 +3036,9 @@ var app = (function () {
     			}
 
     			t1 = space();
-    			add_location(br, file, 257, 3, 10841);
+    			add_location(br, file, 286, 3, 13570);
     			attr_dev(div, "class", "row svelte-kxi75n");
-    			add_location(div, file, 258, 3, 10850);
+    			add_location(div, file, 287, 3, 13579);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -3052,8 +3052,8 @@ var app = (function () {
     			append_dev(div, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*displayedWords*/ 4) {
-    				each_value_1 = /*word*/ ctx[21];
+    			if (dirty & /*displayedWords*/ 4) {
+    				each_value_1 = /*word*/ ctx[18];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -3088,7 +3088,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(257:2) {#each displayedWords as word}",
+    		source: "(286:2) {#each displayedWords as word}",
     		ctx
     	});
 
@@ -3097,11 +3097,7 @@ var app = (function () {
 
     function create_fragment(ctx) {
     	let main;
-    	let t0;
-    	let button;
-    	let t2;
-    	let mounted;
-    	let dispose;
+    	let t;
     	let each_value_2 = /*letters*/ ctx[1];
     	validate_each_argument(each_value_2);
     	let each_blocks = [];
@@ -3120,14 +3116,10 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			t0 = space();
-    			button = element("button");
-    			button.textContent = "rateAlphabet";
-    			t2 = space();
+    			t = space();
     			if (if_block) if_block.c();
-    			add_location(button, file, 252, 1, 10618);
     			attr_dev(main, "class", "svelte-kxi75n");
-    			add_location(main, file, 236, 0, 10255);
+    			add_location(main, file, 265, 0, 12975);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3139,18 +3131,11 @@ var app = (function () {
     				each_blocks[i].m(main, null);
     			}
 
-    			append_dev(main, t0);
-    			append_dev(main, button);
-    			append_dev(main, t2);
+    			append_dev(main, t);
     			if (if_block) if_block.m(main, null);
-
-    			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[10], false, false, false);
-    				mounted = true;
-    			}
     		},
-    		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*letters, toggleFilter, handleInput*/ 50) {
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*letters, toggleFilter, handleInput*/ 26) {
     				each_value_2 = /*letters*/ ctx[1];
     				validate_each_argument(each_value_2);
     				let i;
@@ -3163,7 +3148,7 @@ var app = (function () {
     					} else {
     						each_blocks[i] = create_each_block_2(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(main, t0);
+    						each_blocks[i].m(main, t);
     					}
     				}
 
@@ -3193,8 +3178,6 @@ var app = (function () {
     			if (detaching) detach_dev(main);
     			destroy_each(each_blocks, detaching);
     			if (if_block) if_block.d();
-    			mounted = false;
-    			dispose();
     		}
     	};
 
@@ -3230,24 +3213,30 @@ var app = (function () {
     	let letters = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(""));
     	let filters = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
+    	// console.log(rateAlphabet(words))
+    	let benchmarkResult = benchmark(words);
+
+    	console.log(benchmarkResult);
+    	console.log(average(benchmarkResult));
+
     	function benchmark(words) {
     		let filteredWords;
     		let randomWord;
     		let guess;
     		let attemts = [];
 
-    		for (let i = 0; i < 100; i++) {
+    		for (let i = 0; i < 1000; i++) {
     			filteredWords = words;
     			randomWord = pickRandomWord(words);
 
     			for (let attemt = 1; attemt <= 6; attemt++) {
     				// console.log(filteredWords.length)
-    				if (filteredWords.length > 0 && filteredWords.length <= 4) {
+    				if (filteredWords.length > 0 && filteredWords.length <= 6) {
     					// guess = [...ratedWords(filteredWords, filteredWords).keys()][0];
     					guess = [...ratedWords3(filteredWords, filteredWords).keys()][0];
     				} else if (filteredWords.length > 2000) {
     					guess = "raise";
-    				} else if (filteredWords.length > 4) {
+    				} else if (filteredWords.length > 6) {
     					// guess = [...ratedWords(words, filteredWords).keys()][0];
     					guess = [...ratedWords3(words, filteredWords).keys()][0];
     				}
@@ -3290,141 +3279,96 @@ var app = (function () {
     		return attemts;
     	}
 
-    	const alphabet = [
-    		"a",
-    		"b",
-    		"c",
-    		"d",
-    		"e",
-    		"f",
-    		"g",
-    		"h",
-    		"i",
-    		"j",
-    		"k",
-    		"l",
-    		"m",
-    		"n",
-    		"o",
-    		"p",
-    		"q",
-    		"r",
-    		"s",
-    		"t",
-    		"u",
-    		"v",
-    		"w",
-    		"x",
-    		"y",
-    		"z"
-    	];
-
-    	function rateAlphabet(words) {
-    		const alphabet = [
-    			"a",
-    			"b",
-    			"c",
-    			"d",
-    			"e",
-    			"f",
-    			"g",
-    			"h",
-    			"i",
-    			"j",
-    			"k",
-    			"l",
-    			"m",
-    			"n",
-    			"o",
-    			"p",
-    			"q",
-    			"r",
-    			"s",
-    			"t",
-    			"u",
-    			"v",
-    			"w",
-    			"x",
-    			"y",
-    			"z"
-    		];
-
-    		const wordLength = words[0].length;
-    		const totalNrOfWords = words.length;
-    		let ratedAlphabet = new Map();
-
-    		for (const letter of alphabet) {
-    			// let used: boolean = letters[0].includes(letter);
-    			let rating = new Array(wordLength + 1);
-
-    			rating[wordLength] = words.filter(w => w.includes(letter)).length;
-
-    			for (let i = 0; i < wordLength; i++) {
-    				rating[i] = Math.pow(words.filter(w => Filters.rightPosition(w, letter, i)).length, 2);
-    				rating[i] += Math.pow(words.filter(w => Filters.wrongPosition(w, letter, i)).length, 2);
-    				rating[i] += Math.pow(words.filter(w => Filters.notInWord(w, letter, i)).length, 2);
-    				rating[i] /= totalNrOfWords;
-    			} // if (used) {
-    			// 	rating[i] *= 2;
-
-    			// }
-    			if (letters[0].find(l => l == letter)) ;
-
-    			ratedAlphabet.set(letter, rating);
-    		}
-
-    		return ratedAlphabet;
-    	}
-
-    	function ratedWords(words, filteredWords) {
-    		let ratedWords = new Map();
-    		let sum;
-    		let ratedAlphabet = rateAlphabet(filteredWords);
-
-    		words.forEach(word => {
-    			sum = 0;
-
-    			word.toLocaleLowerCase().split("").forEach((letter, i) => {
-    				sum += ratedAlphabet.get(letter)[i];
-
-    				if (word.split(letter).length > 2) {
-    					sum += 5000;
-    				}
-    			});
-
-    			ratedWords.set(word, sum);
-    		});
-
-    		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]));
-    	}
-
+    	// function rateAlphabet(words: string[]): Map<string, number[]> {
+    	// 	const alphabet: string[] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    	// 	const wordLength = words[0].length;
+    	// 	const totalNrOfWords = words.length;
+    	// 	let ratedAlphabet: Map<string, number[]> = new Map();
+    	// 	for (const letter of alphabet) {
+    	// 		// let used: boolean = letters[0].includes(letter);
+    	// 		let rating: number[] = new Array(wordLength + 1);
+    	// 		rating[wordLength] = words.filter((w) => w.includes(letter)).length;
+    	// 		for (let i = 0; i < wordLength; i++) {
+    	// 			rating[i] = Math.pow(words.filter((w) => Filters.rightPosition(w, letter, i)).length, 2);
+    	// 			rating[i] += Math.pow(words.filter((w) => Filters.wrongPosition(w, letter, i)).length, 2);
+    	// 			rating[i] += Math.pow(words.filter((w) => Filters.notInWord(w, letter, i)).length, 2);
+    	// 			rating[i] /= totalNrOfWords;
+    	// 			// if (used) {
+    	// 			// 	rating[i] *= 2;
+    	// 			// }
+    	// 		}
+    	// 		// if (letters[0].find((l) => l == letter)) {
+    	// 		// }
+    	// 		ratedAlphabet.set(letter, rating);
+    	// 	}
+    	// 	return ratedAlphabet;
+    	// }
+    	// function ratedWords(words: string[], filteredWords: string[]): Map<string, number> {
+    	// 	let ratedWords: Map<string, number> = new Map();
+    	// 	let sum: number;
+    	// 	let ratedAlphabet = rateAlphabet(filteredWords)
+    	// 	words.forEach((word) => {
+    	// 		sum = 0;
+    	// 		word.toLocaleLowerCase().split("").forEach((letter, i) => {
+    	// 			sum += ratedAlphabet.get(letter)[i];
+    	// 			if (word.split(letter).length > 2) {
+    	// 				sum += 5000;
+    	// 			}
+    	// 		})
+    	// 		ratedWords.set(word, sum)
+    	// 	})
+    	// 	return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]))
+    	// }
     	function ratedWords3(words, filteredWords) {
-    		let sortedWords = words; //.sort();
+    		let sortedWords = words.sort();
     		let ratedWords = new Map();
+    		let ratedLetter = [null, null, null, null];
+    		ratedLetter[0] = rateLetterAtPosition(filteredWords, sortedWords[0].charAt(0), 0);
+    		ratedLetter[1] = rateLetterAtPosition(ratedLetter[0].notInWord.filteredWords, sortedWords[0].charAt(1), 1);
+    		ratedLetter[2] = rateLetterAtPosition(ratedLetter[0].rightPosition.filteredWords, sortedWords[0].charAt(1), 1);
+    		ratedLetter[3] = rateLetterAtPosition(ratedLetter[0].wrongPosition.filteredWords, sortedWords[0].charAt(1), 1);
 
-    		// let ratedLetter: RatedLetterAtPosition;
-    		// ratedLetter = rateLetterAtPosition(filteredWords, sortedWords[0].charAt(0), 0);
     		for (let i = 0; i < sortedWords.length; i++) {
     			const word = sortedWords[i];
 
-    			// if (i > 0 && sortedWords[i - 1].charAt(0) != sortedWords[i].charAt(0)) {
-    			// 	ratedLetter = rateLetterAtPosition(sortedWords, sortedWords[i].charAt(0), 0);
-    			// }
-    			ratedWords.set(sortedWords[i], rateWordReqursive(word, filteredWords, 0, 1));
+    			if (i > 0 && sortedWords[i - 1].charAt(0) != sortedWords[i].charAt(0)) {
+    				ratedLetter[0] = rateLetterAtPosition(filteredWords, sortedWords[i].charAt(0), 0);
+    				ratedLetter[1] = rateLetterAtPosition(ratedLetter[0].notInWord.filteredWords, sortedWords[i].charAt(1), 1);
+    				ratedLetter[2] = rateLetterAtPosition(ratedLetter[0].rightPosition.filteredWords, sortedWords[i].charAt(1), 1);
+    				ratedLetter[3] = rateLetterAtPosition(ratedLetter[0].wrongPosition.filteredWords, sortedWords[i].charAt(1), 1);
+    			} else if (i > 0 && sortedWords[i - 1].charAt(1) != sortedWords[i].charAt(1)) {
+    				ratedLetter[1] = rateLetterAtPosition(ratedLetter[0].notInWord.filteredWords, sortedWords[i].charAt(1), 1);
+    				ratedLetter[2] = rateLetterAtPosition(ratedLetter[0].rightPosition.filteredWords, sortedWords[i].charAt(1), 1);
+    				ratedLetter[3] = rateLetterAtPosition(ratedLetter[0].wrongPosition.filteredWords, sortedWords[i].charAt(1), 1);
+    			}
+
+    			ratedWords.set(sortedWords[i], rateWordRecursive(word, filteredWords, 0, 1, ratedLetter));
     		}
 
     		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]));
     	}
 
-    	function rateWordReqursive(word, words, position, probability, ratedLetter) {
-    		if (probability < 0.0001) {
-    			return 0;
-    		}
-
+    	// function rateWordsRecursive(words: string[], index: number, position: number, probability: number, ratedLetter?: RatedLetterAtPosition): number {
+    	// 	let sum = 0;
+    	// 	let ratedLetterAtPosition: RatedLetterAtPosition = ratedLetter ?? rateLetterAtPosition(words, words[index].charAt(position), position);
+    	// 	if (position == words[index].length - 1) {
+    	// 		sum += ratedLetterAtPosition.notInWord.filteredWords.length * ratedLetterAtPosition.notInWord.probability * probability;
+    	// 		sum += ratedLetterAtPosition.rightPosition.filteredWords.length * ratedLetterAtPosition.rightPosition.probability * probability;
+    	// 		sum += ratedLetterAtPosition.wrongPosition.filteredWords.length * ratedLetterAtPosition.wrongPosition.probability * probability;
+    	// 	}
+    	// 	if (position < words[index].length - 1) {
+    	// 		sum += rateWordsRecursive(ratedLetterAtPosition.notInWord.filteredWords, 0, position + 1, ratedLetterAtPosition.notInWord.probability * probability);
+    	// 		sum += rateWordsRecursive(ratedLetterAtPosition.rightPosition.filteredWords, 0, position + 1, ratedLetterAtPosition.rightPosition.probability * probability);
+    	// 		sum += rateWordsRecursive(ratedLetterAtPosition.wrongPosition.filteredWords, 0, position + 1, ratedLetterAtPosition.wrongPosition.probability * probability);
+    	// 	}
+    	// 	return sum;
+    	// }
+    	function rateWordRecursive(word, words, position, probability, ratedLetter) {
+    		var _a;
     		let sum = 0;
 
-    		let ratedLetterAtPosition = ratedLetter !== null && ratedLetter !== void 0
-    		? ratedLetter
+    		let ratedLetterAtPosition = (_a = ratedLetter[0]) !== null && _a !== void 0
+    		? _a
     		: rateLetterAtPosition(words, word.charAt(position), position);
 
     		if (position == word.length - 1) {
@@ -3434,9 +3378,9 @@ var app = (function () {
     		}
 
     		if (position < word.length - 1) {
-    			sum += rateWordReqursive(word, ratedLetterAtPosition.notInWord.filteredWords, position + 1, ratedLetterAtPosition.notInWord.probability * probability);
-    			sum += rateWordReqursive(word, ratedLetterAtPosition.rightPosition.filteredWords, position + 1, ratedLetterAtPosition.rightPosition.probability * probability);
-    			sum += rateWordReqursive(word, ratedLetterAtPosition.wrongPosition.filteredWords, position + 1, ratedLetterAtPosition.wrongPosition.probability * probability);
+    			sum += rateWordRecursive(word, ratedLetterAtPosition.notInWord.filteredWords, position + 1, ratedLetterAtPosition.notInWord.probability * probability, [ratedLetter[1]]);
+    			sum += rateWordRecursive(word, ratedLetterAtPosition.rightPosition.filteredWords, position + 1, ratedLetterAtPosition.rightPosition.probability * probability, [ratedLetter[2]]);
+    			sum += rateWordRecursive(word, ratedLetterAtPosition.wrongPosition.filteredWords, position + 1, ratedLetterAtPosition.wrongPosition.probability * probability, [ratedLetter[3]]);
     		}
 
     		return sum;
@@ -3476,10 +3420,39 @@ var app = (function () {
 
     	// View stuffs
     	function handleInput(e, i, j) {
+    		const alphabet = [
+    			"a",
+    			"b",
+    			"c",
+    			"d",
+    			"e",
+    			"f",
+    			"g",
+    			"h",
+    			"i",
+    			"j",
+    			"k",
+    			"l",
+    			"m",
+    			"n",
+    			"o",
+    			"p",
+    			"q",
+    			"r",
+    			"s",
+    			"t",
+    			"u",
+    			"v",
+    			"w",
+    			"x",
+    			"y",
+    			"z"
+    		];
+
     		let inputEvent = e;
 
     		if (inputEvent.data == null) {
-    			$$invalidate(6, filters[i][j] = Filters.noFilter, filters);
+    			$$invalidate(5, filters[i][j] = Filters.noFilter, filters);
     			document.getElementById(i.toString().concat(j)).style.backgroundColor = "";
     		} else if (alphabet.includes(inputEvent.data.toLocaleLowerCase())) {
     			focusNext(i, j);
@@ -3498,16 +3471,16 @@ var app = (function () {
     		let backgroundColor = "";
 
     		if (filters[row][column] == Filters.noFilter) {
-    			$$invalidate(6, filters[row][column] = Filters.notInWord, filters);
+    			$$invalidate(5, filters[row][column] = Filters.notInWord, filters);
     			backgroundColor = "lightgray";
     		} else if (filters[row][column] == Filters.notInWord) {
-    			$$invalidate(6, filters[row][column] = Filters.wrongPosition, filters);
+    			$$invalidate(5, filters[row][column] = Filters.wrongPosition, filters);
     			backgroundColor = "orange";
     		} else if (filters[row][column] == Filters.wrongPosition) {
-    			$$invalidate(6, filters[row][column] = Filters.rightPosition, filters);
+    			$$invalidate(5, filters[row][column] = Filters.rightPosition, filters);
     			backgroundColor = "lightgreen";
     		} else {
-    			$$invalidate(6, filters[row][column] = Filters.noFilter, filters);
+    			$$invalidate(5, filters[row][column] = Filters.noFilter, filters);
     		}
 
     		document.getElementById(row.toString().concat(column)).style.backgroundColor = backgroundColor;
@@ -3526,7 +3499,6 @@ var app = (function () {
 
     	const click_handler = (i, j) => toggleFilter(i, j);
     	const input_handler = (i, j, e) => handleInput(e, i, j);
-    	const click_handler_1 = () => console.log(rateAlphabet(filteredWords));
 
     	$$self.$capture_state = () => ({
     		Filters,
@@ -3538,14 +3510,12 @@ var app = (function () {
     		nrOfRows,
     		letters,
     		filters,
+    		benchmarkResult,
     		average,
     		benchmark,
     		pickRandomWord,
-    		alphabet,
-    		rateAlphabet,
-    		ratedWords,
     		ratedWords3,
-    		rateWordReqursive,
+    		rateWordRecursive,
     		rateLetterAtPosition,
     		handleInput,
     		focusNext,
@@ -3553,13 +3523,14 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('words' in $$props) $$invalidate(11, words = $$props.words);
+    		if ('words' in $$props) $$invalidate(9, words = $$props.words);
     		if ('filteredWords' in $$props) $$invalidate(0, filteredWords = $$props.filteredWords);
     		if ('displayedWords' in $$props) $$invalidate(2, displayedWords = $$props.displayedWords);
-    		if ('wordLength' in $$props) $$invalidate(12, wordLength = $$props.wordLength);
-    		if ('nrOfRows' in $$props) $$invalidate(13, nrOfRows = $$props.nrOfRows);
+    		if ('wordLength' in $$props) $$invalidate(10, wordLength = $$props.wordLength);
+    		if ('nrOfRows' in $$props) $$invalidate(11, nrOfRows = $$props.nrOfRows);
     		if ('letters' in $$props) $$invalidate(1, letters = $$props.letters);
-    		if ('filters' in $$props) $$invalidate(6, filters = $$props.filters);
+    		if ('filters' in $$props) $$invalidate(5, filters = $$props.filters);
+    		if ('benchmarkResult' in $$props) benchmarkResult = $$props.benchmarkResult;
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -3567,7 +3538,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*letters, filters*/ 66) {
+    		if ($$self.$$.dirty & /*letters, filters*/ 34) {
     			{
     				$$invalidate(0, filteredWords = words.filter(w => {
     					for (let row = 0; row < nrOfRows; row++) {
@@ -3583,14 +3554,16 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*filteredWords*/ 1) {
+    		if ($$self.$$.dirty & /*filteredWords*/ 1) {
     			{
     				if (filteredWords.length > 0) {
     					// && filteredWords.length <= 4) {
     					$$invalidate(2, displayedWords = [...ratedWords3(filteredWords, filteredWords).keys()].slice(0, 10));
-    				} else if (filteredWords.length > 4) {
+    				} else // displayedWords = words.sort();
+    				if (filteredWords.length > 4) {
     					$$invalidate(2, displayedWords = [...ratedWords3(words, filteredWords).keys()].slice(0, 10)); // displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
     				} // displayedWords = [...ratedWords(words, rateAlphabet(filteredWords)).keys()].slice(0, 10)
+    				// displayedWords = words.sort();
     			}
     		}
     	};
@@ -3599,21 +3572,19 @@ var app = (function () {
     		filteredWords,
     		letters,
     		displayedWords,
-    		rateAlphabet,
     		handleInput,
     		toggleFilter,
     		filters,
     		input_input_handler,
     		click_handler,
-    		input_handler,
-    		click_handler_1
+    		input_handler
     	];
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance, create_fragment, safe_not_equal, {}, null, [-1, -1]);
+    		init(this, options, instance, create_fragment, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
