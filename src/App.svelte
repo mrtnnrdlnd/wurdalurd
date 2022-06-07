@@ -14,9 +14,12 @@
 	let filters: Function[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
 		// console.log(rateAlphabet(words))
+	let t0 = performance.now();
 	let benchmarkResult = benchmark(words);
 	console.log(benchmarkResult);
 	console.log(average(benchmarkResult));
+	let t1 = performance.now();
+	console.log(t1 - t0);
 
 	// let t0 = performance.now();
 	// console.log(ratedWords3(words, filteredWords));
@@ -42,14 +45,14 @@
 
 			for (let attemt = 1; attemt <= 6; attemt++) {
 				// console.log(filteredWords.length)
-				if (filteredWords.length > 0 && filteredWords.length <= 6) {
+				if (filteredWords.length > 0 && filteredWords.length <= 4) {
 					// guess = [...ratedWords(filteredWords, filteredWords).keys()][0];
 					guess = [...ratedWords3(filteredWords, filteredWords).keys()][0];
 				}
 				else if (filteredWords.length > 2000) {
 					guess = "raise"
 				}
-				else if (filteredWords.length > 6) {
+				else if (filteredWords.length > 4) {
 					// guess = [...ratedWords(words, filteredWords).keys()][0];
 
 					guess = [...ratedWords3(words, filteredWords).keys()][0];
@@ -194,6 +197,9 @@
 	// }
 
 	function rateWordRecursive(word: string, words: string[], position: number, probability: number, ratedLetter?: RatedLetterAtPosition[]): number {
+		if (probability == 0) {
+			return 0;
+		}
 		let sum = 0;
 		let ratedLetterAtPosition: RatedLetterAtPosition = ratedLetter[0] ?? rateLetterAtPosition(words, word.charAt(position), position);
 		if (position == word.length - 1) {
@@ -242,11 +248,6 @@
 			ratedLetter.notInWord.probability = ratedLetter.notInWord.filteredWords.length / unfilteredNrOfWords;
 			ratedLetter.rightPosition.probability = ratedLetter.rightPosition.filteredWords.length / unfilteredNrOfWords;
 			ratedLetter.wrongPosition.probability = ratedLetter.wrongPosition.filteredWords.length / unfilteredNrOfWords;
-		}
-		else {
-			ratedLetter.notInWord.probability = 0;
-			ratedLetter.rightPosition.probability = 0;
-			ratedLetter.wrongPosition.probability = 0;
 		}
 		return ratedLetter;
 	}
