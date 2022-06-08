@@ -14,12 +14,12 @@
 	let filters: Function[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
 		// console.log(rateAlphabet(words))
-	let t0 = performance.now();
-	let benchmarkResult = benchmark(words);
-	console.log(benchmarkResult);
-	console.log(average(benchmarkResult));
-	let t1 = performance.now();
-	console.log(t1 - t0);
+	// let t0 = performance.now();
+	// let benchmarkResult = benchmark(words);
+	// console.log(benchmarkResult);
+	// console.log(average(benchmarkResult));
+	// let t1 = performance.now();
+	// console.log(t1 - t0);
 
 	// let t0 = performance.now();
 	// console.log(ratedWords3(words, filteredWords));
