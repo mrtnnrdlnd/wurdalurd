@@ -4,14 +4,14 @@ export class Filters {
     }
 
     static notInWord(word: string, letter:string, position: number) {
-        return !word.includes(letter.charAt(0));
+        return !word.includes(letter);
     }
 
     static wrongPosition(word: string, letter:string, position: number) {
-        return word.includes(letter.charAt(0)) && word.charAt(position) != letter.charAt(0);
+        return word.includes(letter) && word.charAt(position) != letter;
     }
 
     static rightPosition(word: string, letter:string, position: number) {
-        return word.charAt(position) == letter.charAt(0);
+        return word.charAt(position) == letter;
     }
 }
