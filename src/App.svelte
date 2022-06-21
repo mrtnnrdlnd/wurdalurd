@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Filters } from './Filters';
-	import { RatedLetterTree, RatingOfLetter, RatedLetterAtPosition } from './Ratings';
+	import { RatedLetterTree, RatingOfLetter, RatedLetterAtPosition, RatedLetterTree2, RatedLetterAtPosition2 } from './Ratings';
 
 	import { wordsLengthFive } from './wordsLengthFiveShort'
 
@@ -14,24 +14,25 @@
 	let letters: string[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(""));
 	let filters: Function[][] = Array(nrOfRows).fill([]).map(() => Array(wordLength).fill(Filters.noFilter));
 
-	// let ratedWordsList: string[] = [...ratedWords3(words, filteredWords).keys()];
-	// console.log(ratedWordsList)
-	// ratedWordsList.slice(0, 10).forEach((word) => {
+	// let ratedWordsList: string[] = [...ratedWords4(words, filteredWords).keys()];
+	// // console.log(ratedWordsList)
+	// ratedWordsList.slice(0, 3).forEach((word) => {
 	// 	let benchmarkResult = benchmark(ratedWordsList, word);
 	// 	console.log(word + ", " + average(benchmarkResult) + ", " + benchmarkResult.length);
 	// });
 
 	// let t0 = performance.now();
-	// let benchmarkResult = benchmark(words, "trace");
+	// let benchmarkResult = benchmark(words, "crate");
 	// console.log(benchmarkResult);
 	// console.log(average(benchmarkResult));
 	// let t1 = performance.now();
 	// console.log(t1 - t0);
 
-	// let t0 = performance.now();
-	// console.log(ratedWords3(words, filteredWords));
-	// let t1 = performance.now();
-	// console.log(t1 - t0);
+	let t0 = performance.now();
+	ratedWords4(words, filteredWords)
+
+	let t1 = performance.now();
+	console.log(t1 - t0);
 
 	function average(numbers: number[]): number {
 		let sum: number = 0;
@@ -55,7 +56,7 @@
 				// console.log(filteredWords.length)
 				if (filteredWords.length > 0 && filteredWords.length <= 4) {
 					// guess = [...ratedWords(filteredWords, filteredWords).keys()][0];
-					guess = [...ratedWords3(filteredWords, filteredWords).keys()][0];
+					guess = [...ratedWords4(filteredWords, filteredWords).keys()][0];
 				}
 				else if (filteredWords.length > 2000) {
 					guess = firstGuess
@@ -63,7 +64,7 @@
 				else if (filteredWords.length > 4) {
 					// guess = [...ratedWords(words, filteredWords).keys()][0];
 
-					guess = [...ratedWords3(words, filteredWords).keys()][0];
+					guess = [...ratedWords4(words, filteredWords).keys()][0];
 				}
 
 				if (guess == word) {
@@ -110,6 +111,8 @@
 	function pickRandomWord(words: string[]): string {
 		return words[Math.floor(Math.random()*words.length)]
 	}
+
+
 
 	
 	// function rateAlphabet(words: string[]): Map<string, number[]> {
@@ -164,6 +167,112 @@
 
 	// 	return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]))
 	// }
+
+	// console.log(ratedWords4(words, filteredWords));
+
+	function ratedWords4 (guessWords: string[], possibleWords: string[]): Map<string, number> {
+		let sortedWords: string[] = ["00000", ...guessWords.sort()];
+		let ratedWords: Map<string, number> = new Map(guessWords.map(w => [w, 0]));
+		let wordLength: number = sortedWords[0].length;
+		let ratedLetter: RatingOfLetter[][] = Array(wordLength + 1).fill([]).map((_, i) => Array(3 ** (i)).fill({probability: -1, filteredWords: []}));
+		
+		ratedLetter[0][0] = {probability: 1, filteredWords: possibleWords}
+
+		let wordScore;
+		let count = 0;
+		let thisRatingIndex;
+		let lastProbability;
+		let lastFilteredLength;
+		let letter;
+
+		for (let i = 1; i < sortedWords.length; i++) {
+			const lastWord = " " + sortedWords[i - 1];
+			const word = " " + sortedWords[i];
+			wordScore = 0;
+
+			// let t0 = performance.now();
+			for (let position = 1; position <= wordLength; position++) {
+				if (lastWord.slice(1, position + 1) !== word.slice(1, position + 1) ) {
+					// console.log(ratedLetter[position-1][0].filteredWords.length)
+					let dimensions = ratedLetter[position].length / 3;
+					for (let lastRatingIndex = 0; lastRatingIndex < dimensions; lastRatingIndex++) {
+						thisRatingIndex = lastRatingIndex * 3;
+						lastProbability = ratedLetter[position - 1][lastRatingIndex].probability;
+						lastFilteredLength = ratedLetter[position - 1][lastRatingIndex].filteredWords.length;
+						letter = word.charAt(position);
+
+						// if (!ratedLetter[position - 1][lastRatingIndex].probability) {
+						// 	continue;
+						// }
+						if (lastFilteredLength == 0) {
+							continue;
+						}
+
+						count++;
+						ratedLetter[position][thisRatingIndex] = {
+								filteredWords: ratedLetter[position - 1][lastRatingIndex].filteredWords.filter((w) => Filters.notInWord(w, letter, position - 1)),
+								probability: lastProbability
+						};
+
+						ratedLetter[position][thisRatingIndex + 1] = {
+								filteredWords: ratedLetter[position - 1][lastRatingIndex].filteredWords.filter((w) => Filters.rightPosition(w, letter, position - 1)),
+								probability: lastProbability
+						};
+						
+
+						ratedLetter[position][thisRatingIndex + 2] = {
+								filteredWords: ratedLetter[position - 1][lastRatingIndex].filteredWords.filter((w) => Filters.wrongPosition(w, letter, position - 1)),
+								probability: lastProbability
+						};
+						
+
+						// if (position == wordLength - 1) {
+						// 	wordScore += ratedLetter[position][thisRatingIndex].probability * ratedLetter[position][thisRatingIndex].filteredWords.length ** 2 / lastFilteredLength;
+						// 	wordScore += ratedLetter[position][thisRatingIndex + 1].probability * ratedLetter[position][thisRatingIndex + 1].filteredWords.length ** 2 / lastFilteredLength;
+						// 	wordScore += ratedLetter[position][thisRatingIndex + 2].probability * ratedLetter[position][thisRatingIndex + 2].filteredWords.length ** 2 / lastFilteredLength;
+						// }  
+						// else {
+							ratedLetter[position][thisRatingIndex].probability *= ratedLetter[position][thisRatingIndex].filteredWords.length / lastFilteredLength;
+							ratedLetter[position][thisRatingIndex + 1].probability *= ratedLetter[position][thisRatingIndex + 1].filteredWords.length / lastFilteredLength;
+							ratedLetter[position][thisRatingIndex + 2].probability *= ratedLetter[position][thisRatingIndex + 2].filteredWords.length / lastFilteredLength;
+						// }
+						
+					}
+					
+				}
+				
+			}
+
+			// console.log(ratedLetter[wordLength - 1]
+			// 						.filter(rated => rated.probability)
+			// 						.map(rated => rated.filteredWords.length * rated.probability)
+			// 						.reduce((p, c) => p + c))
+			// console.log(word + ": " + wordScore)
+			
+			// ratedWords.set(word, wordScore);
+			ratedWords.set(word, ratedLetter[wordLength - 1]
+									.filter(rated => rated.probability)
+									.map(rated => rated.filteredWords.length * rated.probability)
+									.reduce((p, c) => p + c)
+			);
+			// let t1 = performance.now();
+			// 	console.log(word + ": " + (t1 - t0));
+		}
+		console.log(count)
+
+		return new Map([...ratedWords.entries()].sort((a, b) => a[1] - b[1]));
+	}
+
+	// function rateNextLetterInWord (words, letter, position) {
+	// 	let nextRatedLetter = {
+	// 			filteredWords: words.filter((w) => Filters.notInWord(w, letter, position)),
+	// 			probability: ratedLetter.probability
+	// 	};
+	// 	nextRatedLetter.probability *= nextRatedLetter.filteredWords.length / ratedLetter.filteredWords.length;
+	// 	return nextRatedLetter;
+	// }
+
+
 
 	function ratedWords3 (words: string[], filteredWords: string[]): Map<string, number> {
 		let sortedWords = words.sort();
@@ -383,12 +492,13 @@
 
 	$: {
 		if (filteredWords.length > 0 && filteredWords.length <= 4) {
-			displayedWords = [...ratedWords3(filteredWords, filteredWords).keys()].slice(0, 10)
+			displayedWords = [...ratedWords4(filteredWords, filteredWords).keys()].slice(0, 10)
 			// displayedWords = [...ratedWords(filteredWords, rateAlphabet(filteredWords)).keys()].slice(0, 10)
 			// displayedWords = words.sort();
 		}
 		else if (filteredWords.length > 4) {
-			displayedWords = [...ratedWords3(words, filteredWords).keys()].slice(0, 10)
+			console.log(ratedWords4(words, filteredWords));
+			displayedWords = [...ratedWords4(words, filteredWords).keys()].slice(0, 10)
 			// displayedWords = [...ratedWords(words, rateAlphabet(filteredWords)).keys()].slice(0, 10)
 			// displayedWords = words.sort();
 		}
