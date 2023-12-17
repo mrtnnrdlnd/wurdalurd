@@ -1,8 +1,15 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
-  "compilerOptions": {
-    "sourceMap": true
+    "compilerOptions": {
+      "target": "ES2015",                // Set the JavaScript version for output files
+      "module": "commonjs",           // Specify module code generation method
+      "outDir": "./dist",             // Path to output folder
+      "rootDir": "./src",             // Root directory of source files
+      "strict": true,                 // Enable all strict type-checking options
+      "esModuleInterop": true,        // Enables CommonJS/AMD/UMD module interoperability
+      "skipLibCheck": true,           // Skip type checking for all declaration files (*.d.ts)
+      "forceConsistentCasingInFileNames": true // Disallow inconsistently-cased references to the same file.
+    },
+    "include": [
+      "src/**/*.ts"                   // Include all TypeScript files in src (including subdirectories)
+    ]
   }
-}

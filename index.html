@@ -4,16 +4,49 @@
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>Svelte app</title>
+	<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 
-	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='./public/global.css'>
-	<link rel='stylesheet' href='./public/build/bundle.css'>
+	<title>Wurdalurd</title>
+	<!-- <script src='dist/script.js'></script> -->
+	<script type="module" src='src/script.ts'></script>
 
-	<script defer src='./public/build/bundle.js'></script>
-	
+	<style>
+		.letter-row {
+			display: grid;
+    		grid-template-columns: repeat(5, 56px);
+		}
+
+		.letter-box {
+			width: 50px;
+			height: 50px;
+			border: 1px solid black;
+			margin: 2px;
+			padding: 0px;
+			border-radius: 3px;
+			text-align: center;
+			line-height: 50px;
+			font-size: 25px;
+		}
+
+		[data-filter="WRONG_POSITION"] {
+            background-color: orange;
+        }
+		[data-filter="RIGHT_POSITION"] {
+            background-color: lightgreen;
+        }
+		[data-filter="NO_FILTER"] {
+            background-color: white;
+        }
+		[data-filter="NOT_IN_WORD"] {
+            background-color: gray;
+        }
+	</style>
 </head>
-
 <body>
+
+	<div id="input"></div>
+	<br>
+	<div id="output"></div>
+
 </body>
 </html>
