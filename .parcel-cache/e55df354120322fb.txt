@@ -61,7 +61,7 @@
 68C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\timsort\build133470331745710035 1
 83C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@parcel\transformer-json\lib133470331757801343 1
 63C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\get-port133470331761087989 1
-46C:\Users\mrtns\Documents\GitHub\wurdalurd\dist133473644345416897 1
+46C:\Users\mrtns\Documents\GitHub\wurdalurd\dist133473663950868451 1
 102C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\css-marker-pseudo.js133470331760357719 0
 83C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\electron-to-chromium\LICENSE133470331741150012 0
 75C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\resolve-from\license133470331742098911 0
@@ -104,7 +104,7 @@
 106C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\typescript\lib\cs\diagnosticMessages.generated.json133470206226212487 0
 98C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\iframe-srcdoc.js133470331772618922 0
 104C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\module.h133470331758462396 0
-55C:\Users\mrtns\Documents\GitHub\wurdalurd\src\script.ts133473639381696175 0
+55C:\Users\mrtns\Documents\GitHub\wurdalurd\src\script.ts133473663347217528 0
 83C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\type-fest\source\opaque.d.ts133470331749468073 0
 78C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\semver\functions\neq.js133470331750508255 0
 94C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@babel\code-frame\node_modules\has-flag133470331766399021 1
@@ -639,7 +639,6 @@
 104C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\module.c133470331755572030 0
 78C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\utility-types\README.md133470331748068276 0
 95C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\css-resize.js133470331761711491 0
-64C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.2462cf17.js133473644345305876 0
 93C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\lmdb\node_modules\node-addon-api\tools133470331769396724 1
 90C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\lmdb\dependencies\lz4\lib\lz4file.c133470331753008619 0
 75C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\json5\lib\require.js133470331747530463 0
@@ -6002,5 +6001,6 @@
 68C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\.bin\tsserver133470206229545326 0
 82C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\.bin\update-browserslist-db133470331790568000 0
 86C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\.bin\update-browserslist-db.ps1133470331790568000 0
-68C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.2462cf17.js.map133473644345396373 0
-57C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.html133473644345305876 0
+64C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.107a1c49.js133473663950781656 0
+68C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.107a1c49.js.map133473663950868451 0
+57C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.html133473663950781656 0
