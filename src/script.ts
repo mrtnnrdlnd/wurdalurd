@@ -63,10 +63,24 @@ for (let i = 0; i < 6; i++) {
         letterBox.dataset.filter = FilterType[FilterType.NO_FILTER]
         letterBox.dataset.position = (i * 5 + j).toString();
         letterBox.maxLength = 1;
-        letterBox.oninput = (event) => {
+        letterBox.onkeyup = (event) => {
             if (event.target) {
                 const target = event.target as HTMLInputElement;
                 updateGuesses(target);
+
+                const currentPosition = parseInt(target.dataset.position ?? "0");
+                if (target.value.length > 0) {
+                    const next = document.querySelector<HTMLElement>('[data-position = "' + (currentPosition + 1) + '"]');
+                    if (next) {
+                        next.focus();
+                    }   
+                }
+                else if (event.key == "Backspace") {
+                    const previous = document.querySelector<HTMLElement>('[data-position = "' + (currentPosition - 1) + '"]');
+                    if (previous) {
+                        previous.focus();
+                    }   
+                }
             }
             filterWordList()
         }
