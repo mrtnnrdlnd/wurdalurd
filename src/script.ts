@@ -103,7 +103,7 @@ function updateGuesses(letterBox: HTMLInputElement) {
     if (letterBox.dataset.position) {
         const position = parseInt(letterBox.dataset.position);
         guesses[position].position = position;
-        guesses[position].letter = letterBox.value;
+        guesses[position].letter = letterBox.value.toLowerCase();
         guesses[position].filter = letterBox.dataset.filter ?? FilterType[FilterType.NO_FILTER]
     }
 }
