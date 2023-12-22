@@ -27,17 +27,17 @@
 			line-height: 50px;
 			font-size: 25px;
 		}
+		/* .letter-box:empty {
+			background-color: white;
+		} */
 
-		[data-filter="WRONG_POSITION"] {
+		[data-filter="WrongPosition"] {
             background-color: orange;
         }
-		[data-filter="RIGHT_POSITION"] {
+		[data-filter="RightPosition"] {
             background-color: lightgreen;
         }
-		[data-filter="NO_FILTER"] {
-            background-color: white;
-        }
-		[data-filter="NOT_IN_WORD"] {
+		[data-filter="NotInWord"] {
             background-color: gray;
         }
 	</style>
@@ -46,6 +46,9 @@
 
 	<div id="input"></div>
 	<br>
+	<button id="updateButton">update</button>
+	<br>
+	<div id="counter"></div>
 	<div id="output"></div>
 
 </body>

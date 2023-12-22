@@ -1,4 +1,4 @@
-export const wordsLengthFive = [
+export const wordsLengthFive : Array<string> = [
     "cigar",
     "rebut",
     "sissy",
