@@ -4,7 +4,6 @@
 import { wordsLengthFive as wordsShort } from "./wordsLengthFiveShort";
 import { wordsLengthFive as wordsLong } from "./wordsLengthFiveLong";
 
-
 type FilterType = 'NotInWord' | 'WrongPosition' | 'RightPosition';
 
 type WordFilter = (word: string, letter: string, position: number) => boolean;
@@ -30,69 +29,116 @@ type RatedWord = {
     rating: number
 }
 
-type PartlyMemoizedRecursionCall = {NotInWord: Array<string>, WrongPosition: Array<string>, RightPosition: Array<string>};
+function rateWords(answers: Array<string>, guesses: Array<string>, callback: (e: MessageEvent)=>void) {
+    if (window.Worker) {
+        const myWorker = new Worker(new URL('./wordRator.ts', import.meta.url), {type: 'module'});
+        const data = {answers, guesses};
+        
+        myWorker.postMessage(data);
 
-type MemoCache = Map<string, PartlyMemoizedRecursionCall>;
-
-function rateWordRecursiveSplit(firstPart: string, secondPart: string, words: Array<string>, probability: number, cache: MemoCache, steps: string): number {
-    if (words.length === 0 || secondPart.length === 0) return words.length * probability;
-
-    let count = 0;
-
-    let NotInWord: Array<string> = [];
-    let WrongPosition: Array<string> = [];
-    let RightPosition: Array<string> = [];
-
-    const letter = secondPart[0];
-    const position = firstPart.length;
-    firstPart = firstPart + secondPart[0];
-    secondPart = secondPart.slice(1);
-
-    const memoKey = `${firstPart}-${steps}`;
-    if (cache.has(memoKey)) {
-        ({ NotInWord, WrongPosition, RightPosition } = cache.get(memoKey)!);
+        myWorker.onmessage = callback
+        myWorker.onerror = function(error) {
+            console.error('Worker error:', error);
+        };
+    } else {
+        console.log('Your browser doesn\'t support web workers.');
     }
-    else {
-        for (const w of words) {
-            if (filters.NotInWord(w, letter, position)) {
-                NotInWord.push(w)
-            }
-            else if (filters.WrongPosition(w, letter, position)) {
-                WrongPosition.push(w)
-            }
-            else if (filters.RightPosition( w, letter, position)) {
-                RightPosition.push(w)
-            }
-        }
+}
 
-        if (firstPart.length < 4) {
-            cache.set(`${firstPart}-${steps}`, {NotInWord, WrongPosition, RightPosition});
-        }
-    }
+
+let wordRatingWorker: Worker;
+
+if (window.Worker) {
+    wordRatingWorker = new Worker(new URL('./wordRator.ts', import.meta.url), {type: 'module'});
     
-    count += NotInWord.length > 0 ? rateWordRecursiveSplit(firstPart, secondPart, NotInWord, probability * NotInWord.length/words.length, cache, steps + 'N') : 0;  
-    count += WrongPosition.length > 0 ? rateWordRecursiveSplit(firstPart, secondPart, WrongPosition, probability * WrongPosition.length/words.length, cache, steps + 'W') : 0;
-    count += RightPosition.length > 0 ? rateWordRecursiveSplit(firstPart, secondPart, RightPosition, probability * RightPosition.length/words.length, cache, steps + 'R') : 0;
+    wordRatingWorker.onmessage = function(e) {
+        let ratedFilteredWords = e.data as Array<RatedWord>;
+        const counter = document.getElementById("counter")
+        if (counter) {
+            counter.innerHTML = wordsShort.length.toString();
+        }
+        updateShownWords(ratedFilteredWords.map(ratedWord => ratedWord.word).slice(0, 20))
+    }
 
-    return count;
+    wordRatingWorker.onerror = function(error) {
+        console.error('Worker error:', error);
+    };
+} 
+else {
+    console.log('Your browser doesn\'t support web workers.');
 }
 
 
 
+window.addEventListener('beforeunload', () => {
+    if (wordRatingWorker) {
+        wordRatingWorker.terminate();
+    }
+});
 
-function rateWord(word: string, words: Array<string>, cache: MemoCache): number {
-    return rateWordRecursiveSplit("", word, words, 1.0, cache, "");
-}
 
-function rateWords(guesses: Array<string>, answers: Array<string>): Array<RatedWord> {
-    console.time("ratingWords");
-    const cache: MemoCache = new Map();
-    const timedRatedWords = answers.map(word => ({ word: word, rating: rateWord(word, guesses, cache) }))
-    .sort((a, b) => a.rating - b.rating);
-    console.timeEnd("ratingWords");
-    console.log(cache)
-    return timedRatedWords;
-}
+// type PartlyMemoizedRecursionCall = {NotInWord: Array<string>, WrongPosition: Array<string>, RightPosition: Array<string>};
+
+// type MemoCache = Map<string, PartlyMemoizedRecursionCall>;
+
+// function rateWordRecursiveSplit(firstPart: string, secondPart: string, words: Array<string>, probability: number, cache: MemoCache, steps: string): number {
+//     if (words.length === 0 || secondPart.length === 0) return words.length * probability;
+
+//     let count = 0;
+
+//     let NotInWord: Array<string> = [];
+//     let WrongPosition: Array<string> = [];
+//     let RightPosition: Array<string> = [];
+
+//     const letter = secondPart[0];
+//     const position = firstPart.length;
+//     firstPart = firstPart + secondPart[0];
+//     secondPart = secondPart.slice(1);
+
+//     const memoKey = `${firstPart}-${steps}`;
+//     if (cache.has(memoKey)) {
+//         ({ NotInWord, WrongPosition, RightPosition } = cache.get(memoKey)!);
+//     }
+//     else {
+//         for (const w of words) {
+//             if (filters.NotInWord(w, letter, position)) {
+//                 NotInWord.push(w)
+//             }
+//             else if (filters.WrongPosition(w, letter, position)) {
+//                 WrongPosition.push(w)
+//             }
+//             else if (filters.RightPosition( w, letter, position)) {
+//                 RightPosition.push(w)
+//             }
+//         }
+
+//         if (firstPart.length < 4) {
+//             cache.set(`${firstPart}-${steps}`, {NotInWord, WrongPosition, RightPosition});
+//         }
+//     }
+    
+//     count += NotInWord.length > 0 ? rateWordRecursiveSplit(firstPart, secondPart, NotInWord, probability * NotInWord.length/words.length, cache, steps + 'N') : 0;  
+//     count += WrongPosition.length > 0 ? rateWordRecursiveSplit(firstPart, secondPart, WrongPosition, probability * WrongPosition.length/words.length, cache, steps + 'W') : 0;
+//     count += RightPosition.length > 0 ? rateWordRecursiveSplit(firstPart, secondPart, RightPosition, probability * RightPosition.length/words.length, cache, steps + 'R') : 0;
+
+//     return count;
+// }
+
+
+
+
+// function rateWord(word: string, words: Array<string>, cache: MemoCache): number {
+//     return rateWordRecursiveSplit("", word, words, 1.0, cache, "");
+// }
+
+// function rateWords(guesses: Array<string>, answers: Array<string>): Array<RatedWord> {
+//     console.time("ratingWords");
+//     const cache: MemoCache = new Map();
+//     const timedRatedWords = answers.map(word => ({ word: word, rating: rateWord(word, guesses, cache) }))
+//     .sort((a, b) => a.rating - b.rating);
+//     console.timeEnd("ratingWords");
+//     return timedRatedWords;
+// }
 
 type LetterGuess = {
     position: number,
@@ -103,6 +149,20 @@ type LetterGuess = {
 let guesses: Array<LetterGuess> = [...Array(5*6).keys()].map(i => {
         return {position:i, letter: "", filter:filters.NotInWord.toString()}
 });
+
+function filterWords(words: Array<string>, guesses: Array<LetterGuess>): Array<string> {
+    let wordsFiltered: Array<string> = words;
+    for (const guess of guesses) {
+        if (guess.letter.length > 0) {
+            // for (const filterType of Object.keys(filteredWords) as FilterType[])
+            const filterType = guess.filter as FilterType;
+            wordsFiltered = wordsFiltered.filter((word) => {
+                return applyFilter(filterType, word, guess.letter, guess.position % 5)
+            });
+        }
+    }
+    return wordsFiltered;
+}
 
 function cycleFilter(currentFilter: string): string {
     const keys = Object.keys(filters) as string[]
@@ -168,24 +228,86 @@ document.addEventListener('DOMContentLoaded', () => {
         
     
     }
-    const ratedWordsies = rateWords(wordsShort, wordsLong);
-    counter.innerHTML = wordsShort.length.toString();
-    updateShownWords(ratedWordsies.map(ratedWord => ratedWord.word).slice(0, 20))
+    const data = {answers: wordsShort, guesses: wordsLong}; 
+    wordRatingWorker.postMessage(data);
+    // rateWords(wordsShort, wordsLong, (e) => {
+    //     let ratedFilteredWords = e.data as Array<RatedWord>;
+    //     counter.innerHTML = wordsShort.length.toString();
+    //     updateShownWords(ratedFilteredWords.map(ratedWord => ratedWord.word).slice(0, 20))
+    // })
+    // if (window.Worker) {
+    //     const myWorker = new Worker(new URL('./wordRator.ts', import.meta.url), {type: 'module'});
+    
+    //     const data = {answers: wordsShort, guesses: wordsLong};
+    //     console.log(data)
+        
+    //     myWorker.postMessage(data); // Sending a message to the worker
+    
+    //     myWorker.onmessage = function(e) {
+    //         console.log('Message received from worker:', e.data);
+    //         let ratedFilteredWords = e.data as Array<RatedWord>;
+    //         console.log(ratedFilteredWords);
+    //         counter.innerHTML = wordsShort.length.toString();
+    //         updateShownWords(ratedFilteredWords.map(ratedWord => ratedWord.word).slice(0, 20))
+    //     };
+    
+    //     myWorker.onerror = function(error) {
+    //         console.error('Worker error:', error);
+    //     };
+    // } else {
+    //     console.log('Your browser doesn\'t support web workers.');
+    // }
+    // const ratedWordsies = rateWords(wordsShort, wordsLong);
+    // counter.innerHTML = wordsShort.length.toString();
+    // updateShownWords(ratedWordsies.map(ratedWord => ratedWord.word).slice(0, 20))
 
     if (button) {
         button.addEventListener('click', () => {
             console.log("clicked")
             let filteredWords = filterWords(wordsShort, guesses);
             console.log(filteredWords);
-            let ratedFilteredWords = rateWords(filteredWords, wordsLong);
-            console.log(ratedFilteredWords);
-            counter.innerHTML = filteredWords.length.toString();
-            if (filteredWords.length < 3) {
-                updateShownWords(filteredWords)
-            }
-            else {
-                updateShownWords(ratedFilteredWords.map(ratedWord => ratedWord.word).slice(0, 20))
-            }
+
+
+            const data = {answers: filteredWords, guesses: wordsLong}; 
+            wordRatingWorker.postMessage(data);
+            // Testing webworker
+            // if (window.Worker) {
+            //     const myWorker = new Worker(new URL('./wordRator.ts', import.meta.url), {type: 'module'});
+            
+            //     const data = {answers: filteredWords, guesses: wordsLong};
+
+            //     myWorker.postMessage(data); // Sending a message to the worker
+            
+            //     myWorker.onmessage = function(e) {
+            //         console.log('Message received from worker:', e.data);
+            //         let ratedFilteredWords = e.data as Array<RatedWord>;
+            //         console.log(ratedFilteredWords);
+            //         counter.innerHTML = filteredWords.length.toString();
+            //         if (filteredWords.length < 3) {
+            //             updateShownWords(filteredWords)
+            //         }
+            //         else {
+            //             updateShownWords(ratedFilteredWords.map(ratedWord => ratedWord.word).slice(0, 20))
+            //         }
+            //     };
+            
+            //     myWorker.onerror = function(error) {
+            //         console.error('Worker error:', error);
+            //     };
+            // } else {
+            //     console.log('Your browser doesn\'t support web workers.');
+            // }
+            // End testing webworker
+
+            // let ratedFilteredWords = rateWords(filteredWords, wordsLong);
+            // console.log(ratedFilteredWords);
+            // counter.innerHTML = filteredWords.length.toString();
+            // if (filteredWords.length < 3) {
+            //     updateShownWords(filteredWords)
+            // }
+            // else {
+            //     updateShownWords(ratedFilteredWords.map(ratedWord => ratedWord.word).slice(0, 20))
+            // }
             
         });
     } else {
@@ -214,16 +336,4 @@ function updateShownWords(words: Array<string>) {
     });  
 }
 
-function filterWords(words: Array<string>, guesses: Array<LetterGuess>): Array<string> {
-    let wordsFiltered: Array<string> = words;
-    for (const guess of guesses) {
-        if (guess.letter.length > 0) {
-            // for (const filterType of Object.keys(filteredWords) as FilterType[])
-            const filterType = guess.filter as FilterType;
-            wordsFiltered = wordsFiltered.filter((word) => {
-                return applyFilter(filterType, word, guess.letter, guess.position % 5)
-            });
-        }
-    }
-    return wordsFiltered;
-}
+

@@ -2307,5 +2307,6 @@ export const wordsLengthFive : Array<string> = [
     "rower",
     "artsy",
     "rural",
-    "shave"
+    "shave",
+    "kaput"
 ]
