@@ -1,6 +1,6 @@
 import {filters} from "./Filters"
 
-type RatedWord = {
+export type RatedWord = {
     word: string,
     rating: number
 }

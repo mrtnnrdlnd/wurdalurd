@@ -61,7 +61,7 @@
 68C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\timsort\build133470331745710035 1
 83C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@parcel\transformer-json\lib133470331757801343 1
 63C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\get-port133470331761087989 1
-46C:\Users\mrtns\Documents\GitHub\wurdalurd\dist133485949466782249 1
+46C:\Users\mrtns\Documents\GitHub\wurdalurd\dist133486571523177702 1
 102C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\css-marker-pseudo.js133470331760357719 0
 83C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\electron-to-chromium\LICENSE133470331741150012 0
 75C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\resolve-from\license133470331742098911 0
@@ -117,7 +117,7 @@
 65C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\nullthrows133470331747283670 1
 104C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\input-email-tel-url.js133470331773838249 0
 61C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\base-x133470331746121968 1
-56C:\Users\mrtns\Documents\GitHub\wurdalurd\src\Filters.ts133481522439382044 0
+56C:\Users\mrtns\Documents\GitHub\wurdalurd\src\Filters.ts133486565383566738 0
 85C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\node-addon-api\tools\README.md133470331749266754 0
 81C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\mdn-data\css\syntaxes.json133470331749160667 0
 108C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@parcel\optimizer-svgo\node_modules\svgo\lib\types.ts133470331774728708 0
@@ -138,13 +138,13 @@
 100C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\urlsearchparams.js133470331782728560 0
 98C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\iframe-srcdoc.js133470331772618922 0
 104C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\module.h133470331758462396 0
-55C:\Users\mrtns\Documents\GitHub\wurdalurd\src\script.ts133482128125056365 0
+55C:\Users\mrtns\Documents\GitHub\wurdalurd\src\script.ts133486570392992318 0
 83C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\type-fest\source\opaque.d.ts133470331749468073 0
 90C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\_\_update\package.json133470331765599390 0
 85C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\svgo\plugins\collapseGroups.js133470331751410611 0
 75C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\escape-string-regexp133470331740858610 1
 81C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\term-size\vendor\.DS_Store133470331743642043 0
-58C:\Users\mrtns\Documents\GitHub\wurdalurd\src\wordRator.ts133482106707736544 0
+58C:\Users\mrtns\Documents\GitHub\wurdalurd\src\wordRator.ts133486554057656440 0
 78C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\semver\functions\neq.js133470331750508255 0
 94C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@babel\code-frame\node_modules\has-flag133470331766399021 1
 83C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\semver\ranges\min-version.js133470331750366803 0
@@ -2415,7 +2415,7 @@
 78C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\js-yaml\lib\type\int.js133470331747621006 0
 100C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\async-clipboard.js133470331750993546 0
 80C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\js-yaml\lib\type\merge.js133470331749181276 0
-72C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\wordRator.7c9f3810.js.map133485949466762069 0
+72C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\wordRator.7c9f3810.js.map133486571523057673 0
 109C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\csso\node_modules\css-tree\lib\lexer\prepare-tokens.js133470331778765160 0
 79C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\js-yaml\lib\type\omap.js133470331749468073 0
 73C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\boolbase\README.md133470331739141427 0
@@ -2878,6 +2878,7 @@
 114C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\dom-serializer\node_modules\entities\lib\maps\entities.json133470331766409067 0
 82C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\csso\cjs\replace\Atrule.cjs133470331746510589 0
 73C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\commander\index.js133470331760962362 0
+68C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.d37b262f.js.map133486571523177702 0
 112C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\dom-serializer\node_modules\entities\lib\maps\legacy.json133470331766530165 0
 122C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@parcel\optimizer-svgo\node_modules\svgo\lib\svgo\css-class-list.js133470331770060535 0
 109C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\csso\node_modules\css-tree\cjs\lexer\generic-const.cjs133470331770191619 0
@@ -2947,6 +2948,7 @@
 109C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\csso\node_modules\mdn-data\api\inheritance.schema.json133470331767143603 0
 79C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\csso\cjs\clean\utils.cjs133470331750885497 0
 92C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\cjs\_to_property_key.cjs133470331755114050 0
+76C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.runtime.4968b172.js.map133486571523177702 0
 86C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\csso\node_modules\css-tree\data133470331779745867 1
 86C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\csso\node_modules\css-tree\dist133470331779625385 1
 85C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\csso\node_modules\css-tree\lib133470331779635372 1
@@ -4238,6 +4240,7 @@
 108C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\src\_class_static_private_method_get.mjs133470331770080589 0
 101C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\css-text-spacing.js133470331762411325 0
 106C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\css-text-wrap-balance.js133470331762461278 0
+72C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.runtime.4968b172.js133486571522977794 0
 99C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\css-textshadow.js133470331762487757 0
 100C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\css-transitions.js133470331762547852 0
 98C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\css-variables.js133470331762638457 0
@@ -4398,7 +4401,7 @@
 92C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\picture.js133470331779705865 0
 94C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\png-alpha.js133470331779852091 0
 97C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\_\_class_apply_descriptor_get133470331760912343 1
-68C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\wordRator.7c9f3810.js133485949466669483 0
+68C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\wordRator.7c9f3810.js133486571522977794 0
 132C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@parcel\optimizer-svgo\node_modules\css-tree\lib\syntax\node\ClassSelector.js133470331768979069 0
 92C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\pointer.js133470331779892277 0
 96C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\caniuse-lite\data\features\pointerlock.js133470331779912392 0
@@ -4687,7 +4690,6 @@
 84C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\src\_extends.mjs133470331770900051 0
 93C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\src\_get_prototype_of.mjs133470331770981144 0
 100C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\src\_interop_require_default.mjs133470331771640212 0
-72C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.runtime.a81ba619.js133485949466669483 0
 95C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\src\_is_native_function.mjs133470331771791023 0
 104C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\src\_is_native_reflect_construct.mjs133470331771821270 0
 100C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\@swc\helpers\src\_iterable_to_array_limit.mjs133470331771951825 0
@@ -6008,7 +6010,5 @@
 68C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\.bin\tsserver133470206229545326 0
 82C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\.bin\update-browserslist-db133470331790568000 0
 86C:\Users\mrtns\Documents\GitHub\wurdalurd\node_modules\.bin\update-browserslist-db.ps1133470331790568000 0
-64C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.c8ee709d.js133485949466669483 0
-68C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.c8ee709d.js.map133485949466772166 0
-57C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.html133485949466669483 0
-76C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.runtime.a81ba619.js.map133485949466762069 0
+64C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.d37b262f.js133486571522977794 0
+57C:\Users\mrtns\Documents\GitHub\wurdalurd\dist\index.html133486571522857923 0

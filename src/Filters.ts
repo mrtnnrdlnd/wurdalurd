@@ -16,3 +16,8 @@ export function applyFilter(filterType: FilterType, word: string, letter: string
     }
     return filterFunction(word, letter, position);
 }
+
+export function cycleFilter(currentFilter: string): string {
+    const keys = Object.keys(filters) as string[]
+    return keys[(keys.indexOf(currentFilter) + 1) % (keys.length)];
+}
